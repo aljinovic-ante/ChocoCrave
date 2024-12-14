@@ -1,0 +1,66 @@
+[
+    {
+      "name": "Kraš",
+      "location": "Zagreb, Croatia",
+      "image": "https://tehnika.lzmk.hr/wp-content/uploads/2021/10/HTE2_2454.jpg",
+      "description": "Kraš is a Croatian company with over a century of tradition in producing high-quality confectionery products. Known for iconic brands like Bajadera, Dorina, and Griotte, Kraš has become synonymous with premium chocolates and sweets in the region. Its commitment to quality and innovation has helped it maintain a strong presence in both domestic and international markets.",
+      "website": "https://www.kras.hr"
+    },
+    {
+      "name": "Kandit",
+      "location": "Osijek, Croatia",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Logo_Kandit_09084.jpg/220px-Logo_Kandit_09084.jpg",
+      "description": "Kandit, based in Osijek, is one of Croatia's leading confectionery manufacturers with a long-standing tradition of producing high-quality chocolates and sweets. Their product range includes chocolate bars, pralines, and spreads, often infused with unique flavors that reflect local heritage. Kandit is recognized for its dedication to quality and its ability to innovate while respecting traditional recipes.",
+      "website": "https://www.kandit.hr"
+    },
+    {
+      "name": "Mondelēz International",
+      "location": "Chicago, Illinois, USA",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXANeYiuHvKLx-jhDSY_zkhrzRYU3KdCQXHQ&s",
+      "description": "Mondelēz International is one of the world's largest manufacturers of snacks, chocolate, and confectionery. With iconic brands like Milka, Toblerone, and Cadbury under its umbrella, the company is known for blending tradition with modern innovation. Its focus on sustainability and ethical sourcing has helped it lead the global chocolate market with a strong commitment to quality.",
+      "website": "https://www.mondelezinternational.com"
+    },
+    {
+      "name": "Ritter Sport GmbH",
+      "location": "Waldenbuch, Germany",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjJ2qPeGrXigfZ4lD-ivVSY9B7FIkX8Rd76Q&s",
+      "description": "Ritter Sport is a German chocolate company renowned for its square-shaped bars and bold, colorful packaging. Founded in 1912, the brand focuses on high-quality ingredients and sustainable production practices. Their wide variety of flavors and innovative combinations make them a favorite among chocolate lovers worldwide. Ritter Sport emphasizes ethical cocoa sourcing and environmental responsibility.",
+      "website": "https://www.ritter-sport.com"
+    },
+    {
+      "name": "Ferrero",
+      "location": "Alba, Italy",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPq1Lc64vy013r4QspCWIJ0SKVaC4wsciPBg&s",
+      "description": "Ferrero is an Italian confectionery giant best known for creating globally loved products such as Nutella, Ferrero Rocher, and Kinder. With a deep commitment to quality, innovation, and sustainability, Ferrero has become one of the most trusted names in the chocolate industry. Its luxurious pralines and creative product designs continue to captivate consumers worldwide.",
+      "website": "https://www.ferrero.com"
+    },
+    {
+      "name": "Zvečevo",
+      "location": "Požega, Croatia",
+      "image": "https://tehnika.lzmk.hr/wp-content/uploads/2021/02/HTE2_1495.jpg",
+      "description": "Zvečevo is a historic Croatian confectionery company from Požega, known for its pioneering innovations in chocolate production. The brand introduced Mikado, the first chocolate with rice, which became a household favorite. Zvečevo is celebrated for blending tradition with creativity, offering a range of chocolates and liqueurs that highlight Croatian craftsmanship and originality.",
+      "website": "https://www.zvecevo.hr"
+    },
+    {
+      "name": "Nestlé",
+      "location": "Vevey, Switzerland",
+      "image": "https://raw.githubusercontent.com/detain/svg-logos/master/svg/n/nestle-4.svg",
+      "description": "Nestlé is a global leader in the food and beverage industry, renowned for its wide range of chocolates, including KitKat, Smarties, and After Eight. With a legacy spanning over 150 years, Nestlé continues to innovate while maintaining a strong focus on sustainability. The company prioritizes responsible cocoa sourcing and is committed to reducing its environmental footprint.",
+      "website": "https://www.nestle.com"
+    },
+    {
+      "name": "Lindt & Sprüngli",
+      "location": "Kilchberg, Switzerland",
+      "image": "https://www.lindt-spruengli.com/media/logo/stores/8/logo-lindt-corporate-392x138.png",
+      "description": "Lindt & Sprüngli is a Swiss chocolatier famous for its premium chocolates and luxurious truffles. With a history dating back to 1845, the company has mastered the art of chocolate-making, offering a diverse range of products that cater to connoisseurs. Lindt is also dedicated to sustainability, focusing on ethical cocoa sourcing through its 'Farming Program.'",
+      "website": "https://www.lindt.com"
+    },
+    {
+      "name": "Mars Incorporated",
+      "location": "McLean, Virginia, USA",
+      "image": "https://aut.mars.com/sites/g/files/jydpyr836/files/2019-05/Media%20Resources%20-%20Mars%20Wordmark%20RGB%20Blue_2.png",
+      "description": "Mars Incorporated is one of the world's leading manufacturers of confectionery, known for iconic brands like Snickers, Mars Bars, and M&M's. The company has a strong commitment to sustainability and innovation, continuously improving its products and production processes. Mars is a family-owned business with a long history of excellence in the confectionery market.",
+      "website": "https://www.mars.com"
+    }
+  ]
+  
