@@ -1,8 +1,14 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Test from './components/test.js'
+
 function App() {
   return (
-    <Test />
+    <Router>
+      <Routes>
+        <Route path="/" element={<Test />} />
+      </Routes>
+    </Router>
   );
 }
 
