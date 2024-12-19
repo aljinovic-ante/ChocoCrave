@@ -10,6 +10,9 @@ const MONGO_URI = 'mongodb://127.0.0.1:27017/chococrave';
 app.use(cors());
 app.use(express.json());
 
+const authRouter = require('./routes/auth');
+app.use('/auth', authRouter);
+
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
