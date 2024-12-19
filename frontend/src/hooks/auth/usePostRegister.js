@@ -16,7 +16,7 @@ const usePostRegister = () => {
       });
 
       if (response.ok) {
-        navigate('/'); //zaljant ovo triba ic u login
+        navigate('/login');
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'Registration failed.');
