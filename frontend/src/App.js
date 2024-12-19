@@ -5,13 +5,13 @@ import RegisterForm from './components/auth/register';
 import LoginForm from './components/auth/login';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/auth/privateRoute';
-import CustomNavbar from './components/common/navbar';
+import Navbar from './components/common/navbar';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <CustomNavbar />
+        <Navbar />
         <Routes>
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginForm />} />
