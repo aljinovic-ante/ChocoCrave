@@ -68,10 +68,8 @@ router.post('/login', async (req, res) => {
         username: user.username,
         isAdmin: user.isAdmin,
       },
-      JWT_SECRET,
-      { expiresIn: '1h' }
+      JWT_SECRET
     );
-
     res.json({
       user: {
         id: user._id,

@@ -4,14 +4,14 @@ import { useAuth } from '../context/AuthContext';
 export default function Test() {
   const [manufacturers, setManufacturers] = useState([]);
   const [error, setError] = useState(null);
-  const { authToken } = useAuth();
+  const { token } = useAuth();
 
   useEffect(() => {
     const fetchManufacturers = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/manufacturers', {
           headers: {
-            Authorization: `Bearer ${authToken}`, // Include JWT token
+            Authorization: `Bearer ${token}`,
           },
         });
         if (!response.ok) {
@@ -24,8 +24,8 @@ export default function Test() {
       }
     };
 
-    if (authToken) fetchManufacturers();
-  }, [authToken]);
+    if (token) fetchManufacturers();
+  }, [token]);
 
   if (error) return <h1>Error: {error}</h1>;
 

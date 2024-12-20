@@ -6,7 +6,6 @@ const authenticateAdmin = require('../middleware/requireAdmin');
 const router = express.Router();
 
 router.get('/', authenticateAdmin, async (req, res) => {
-  console.log('Route hit!');
   try {
     const users = await User.find();
     res.json(users);

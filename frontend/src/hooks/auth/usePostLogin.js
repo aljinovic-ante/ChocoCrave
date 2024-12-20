@@ -20,7 +20,6 @@ const usePostLogin = () => {
       if (response.ok) {
         const data = await response.json();
         login(data);
-        localStorage.setItem('authToken', data.token);
         navigate('/');
       } else {
         const errorData = await response.json();

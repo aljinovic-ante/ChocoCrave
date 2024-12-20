@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const authenticateAdmin = async (req, res, next) => {
-  const token = req.header('Authorization')?.split(' ')[1];
+  const authHeader = req.header('Authorization');
+  const token = authHeader?.split(' ')[1];
 
   if (!token) {
     console.log('No token provided');
@@ -11,17 +12,16 @@ const authenticateAdmin = async (req, res, next) => {
 
   try {
     const verified = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = verified;
-
     console.log('Verified user:', verified);
 
-    if (!req.user.isAdmin) {
-      console.log('User is not admin:', req.user);
+    if (!verified.isAdmin) {
+      console.log('User is not admin:', verified);
       return res
         .status(403)
         .json({ error: 'Access denied, admin privileges required!' });
     }
 
+    req.user = verified;
     console.log('Admin authenticated');
     next();
   } catch (err) {

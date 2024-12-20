@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const usePostLogout = () => {
-  const { authToken, logout } = useAuth();
+  const { token, logout } = useAuth();
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ const usePostLogout = () => {
       const response = await fetch('http://localhost:5000/auth/logout', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (response.ok) {
