@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Button, Modal, Form } from 'react-bootstrap';
-import { BsFloppyFill, BsPencilSquare, BsTrash } from 'react-icons/bs';
 import { useAuth } from '../../context/AuthContext';
 import useGetUsers from '../../hooks/users/useGetUsers';
 import usePutUser from '../../hooks/users/usePutUser';
 import useDeleteUser from '../../hooks/users/useDeleteUser';
 import useChangePassword from '../../hooks/users/useChangePass';
+import '../../css/users.css';
 
 const Users = () => {
   const { user } = useAuth();
@@ -26,15 +25,9 @@ const Users = () => {
 
   useEffect(() => {
     if (putError) console.error('Put Error:', putError);
-  }, [putError]);
-
-  useEffect(() => {
     if (deleteError) console.error('Delete Error:', deleteError);
-  }, [deleteError]);
-
-  useEffect(() => {
     if (changePasswordError) console.error('Change Password Error:', changePasswordError);
-  }, [changePasswordError]);
+  }, [putError, deleteError, changePasswordError]);
 
   const handleEdit = (userData) => {
     setEditUser(userData);
@@ -79,24 +72,10 @@ const Users = () => {
       setPasswordMatchError('Passwords do not match');
       return;
     }
-
-    try {
-      await changePassword(selectedUser._id, { oldPassword, newPassword });
-      refetchUsers();
-      handleCloseChangePasswordModal();
-    } catch (error) {
-      alert('Error changing password');
-    }
+    await changePassword(selectedUser._id, { oldPassword, newPassword });
+    refetchUsers();
+    handleCloseChangePasswordModal();
   };
-
-  console.log("USER STATUS: ",user.isAdmin)
-  if (!user || !user.isAdmin) {
-    return (
-      <Container className="mt-5">
-        <h1>Only admin access allowed</h1>
-      </Container>
-    );
-  }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -105,13 +84,14 @@ const Users = () => {
   if (getError) {
     return <div>Error: {getError.message}</div>;
   }
-  console.log(users)
+
   return (
-    <Container className="mt-5">
-      <h1>Users</h1>
-      <Table striped bordered hover>
+    <div className="users-container">
+      <h1>Users Panel</h1>
+      <table className="users-table">
         <thead>
           <tr>
+            <th>Username</th>
             <th>Email</th>
             <th>Admin</th>
             <th>Actions</th>
@@ -120,113 +100,96 @@ const Users = () => {
         <tbody>
           {users.map((u) => (
             <tr key={u._id}>
-              <td className="align-middle">{u.email}</td>
-              <td className="align-middle">{u.isAdmin.toString()}</td>
+              <td>{u.username}</td>
+              <td>{u.email}</td>
+              <td style={{ color: u.isAdmin ? 'green' : 'red' }}>{u.isAdmin.toString()}</td>
               <td>
-                {user.email !== u.email && (
-                  <>
-                    <Button variant="light" className="text-warning" onClick={() => handleEdit(u)}>
-                      <BsPencilSquare />
-                    </Button>
-                    <Button
-                      variant="light"
-                      className="text-warning"
-                      onClick={() => handleChangePassword(u)}
-                    >
-                      Change Password
-                    </Button>
-                    <Button
-                      variant="light"
-                      className="text-danger"
-                      onClick={() => handleDelete(u._id)}
-                    >
-                      <BsTrash />
-                    </Button>
-                  </>
-                )}
+                <div className="user-actions">
+                  <button className="btn-warning" onClick={() => handleEdit(u)}>
+                    Edit
+                  </button>
+                  <button className="btn-primary" onClick={() => handleChangePassword(u)}>
+                    Change Password
+                  </button>
+                  <button className="btn-danger" onClick={() => handleDelete(u._id)}>
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
 
-      <Modal show={showEditModal} onHide={handleCloseEditModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit User</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {editUser && (
-            <>
-              <Form.Group className="mb-3" controlId="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
+      {showEditModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={handleCloseEditModal}>&times;</span>
+            <h2>Edit User</h2>
+            {editUser && (
+              <div>
+                <label>Email</label>
+                <input
                   type="email"
                   value={editUser.email}
                   onChange={(e) => setEditUser({ ...editUser, email: e.target.value })}
                 />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="isAdmin">
-                <Form.Check
-                  type="checkbox"
-                  label="Admin"
-                  checked={editUser.isAdmin}
-                  onChange={(e) => setEditUser({ ...editUser, isAdmin: e.target.checked })}
-                />
-              </Form.Group>
-            </>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseEditModal}>
-            Close
-          </Button>
-          <Button variant="warning" onClick={handleUpdateUser}>
-            <BsFloppyFill /> Update
-          </Button>
-        </Modal.Footer>
-      </Modal>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={editUser.isAdmin}
+                    onChange={(e) => setEditUser({ ...editUser, isAdmin: e.target.checked })}
+                  />
+                  Admin
+                </label>
+              </div>
+            )}
+            <button onClick={handleUpdateUser}>Update</button>
+          </div>
+        </div>
+      )}
 
-      <Modal show={showChangePasswordModal} onHide={handleCloseChangePasswordModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Change Password</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group controlId="oldPassword">
-            <Form.Label>Old Password</Form.Label>
-            <Form.Control
-              type="password"
-              value={oldPassword}
-              onChange={(e) => setOldPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="newPassword">
-            <Form.Label>New Password</Form.Label>
-            <Form.Control
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="repeatPassword">
-            <Form.Label>Repeat Password</Form.Label>
-            <Form.Control
-              type="password"
-              value={repeatPassword}
-              onChange={(e) => setRepeatPassword(e.target.value)}
-            />
-            {passwordMatchError && <p className="text-danger">{passwordMatchError}</p>}
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseChangePasswordModal}>
-            Close
-          </Button>
-          <Button variant="warning" onClick={handleSaveNewPassword}>
-            <BsFloppyFill /> Save Password
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </Container>
+      {showChangePasswordModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-header">
+              <h2>Change Password</h2>
+              <span className="close" onClick={handleCloseChangePasswordModal}>&times;</span>
+            </div>
+            <div className="modal-body">
+              <label>Old Password</label>
+              <input
+                type="password"
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
+              />
+              <label>New Password</label>
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+              <label>Repeat Password</label>
+              <input
+                type="password"
+                value={repeatPassword}
+                onChange={(e) => setRepeatPassword(e.target.value)}
+              />
+              {passwordMatchError && <p className="error">{passwordMatchError}</p>}
+            </div>
+            <div className="modal-footer">
+              <button className="btn-secondary" onClick={handleCloseChangePasswordModal}>
+                Cancel
+              </button>
+              <button className="btn-primary" onClick={handleSaveNewPassword}>
+                Save Password
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+    </div>
   );
 };
 
