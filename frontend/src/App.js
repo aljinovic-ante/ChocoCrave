@@ -6,6 +6,7 @@ import LoginForm from './components/auth/login';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/auth/privateRoute';
 import Navbar from './components/common/navbar';
+import Users from './components/users/users';
 
 function App() {
   return (
@@ -20,6 +21,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Test />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <PrivateRoute>
+                <Users />
               </PrivateRoute>
             }
           />

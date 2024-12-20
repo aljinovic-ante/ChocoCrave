@@ -7,10 +7,8 @@ const LogoutButton = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    if (window.confirm('Are you sure you want to log out?')) {
-      logout();
-      navigate('/login');
-    }
+    logout();
+    navigate('/login');
   };  
 
   return <button onClick={handleLogout}>Logout</button>;

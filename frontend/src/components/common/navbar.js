@@ -23,7 +23,11 @@ const Navbar = () => {
       <div className="nav-right">
         {user && (
           <>
-            <span className="username">Hello, {user.username}</span>
+            <span className="username">Hello, {user.username}</span> 
+            <p style={{ color: 'white' }}>|</p>
+            {user.isAdmin && (
+              <a href="/admin" className="admin-link">Admin Panel</a>
+            )}
             <button className="logout-button" onClick={handleLogout}>
               Logout
             </button>

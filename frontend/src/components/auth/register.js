@@ -10,12 +10,13 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const { postRegister, error } = usePostRegister();
+  const [ passError, setPassError ] = useState('');
 
   const handleRegister = (e) => {
     e.preventDefault();
 
     if (password !== repeatPassword) {
-      alert('Passwords do not match');
+      setPassError('Passwords do not match');
       return;
     }
 
@@ -23,7 +24,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="register-page"> {/* Scoped container */}
+    <div className="register-page">
       <Container>
         <Row className="justify-content-center">
           <Col md={12}>
@@ -65,7 +66,8 @@ const RegisterForm = () => {
                       onChange={(e) => setRepeatPassword(e.target.value)}
                     />
                   </Form.Group>
-                  {error && <p className="text-danger">{error}</p>}
+                  {error && <p style={{ color: 'red', fontWeight: 'bold', textAlign: 'center' }}>{error}</p>}
+                  {passError && <p style={{ color: 'red', fontWeight: 'bold', textAlign: 'center' }}>{passError}</p>}
                   <div className="d-grid gap-2">
                     <Button type="submit">Register</Button>
                   </div>

@@ -25,7 +25,7 @@ const LoginForm = () => {
             <Card>
               <Card.Body>
                 <h2 className="text-center">Login</h2>
-                {message && <p className="text-danger text-center">{message}</p>}
+                {message && <p style={{ color: 'red', fontWeight: 'bold', textAlign: 'center' }}>{message}</p>}
                 <Form onSubmit={handleLogin}>
                   <Form.Group className="mb-3">
                     <Form.Control
@@ -43,7 +43,7 @@ const LoginForm = () => {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </Form.Group>
-                  {error && <p className="text-danger">{error}</p>}
+                  {error && <p style={{ color: 'red', fontWeight: 'bold', textAlign: 'center' }}>{error}</p>}
                   <div className="d-grid">
                     <Button type="submit">Login</Button>
                   </div>

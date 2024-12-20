@@ -32,10 +32,10 @@
 
 .nav-left .nav-link {
   color: #ffffff; 
-  font-size: 1.2rem; 
+  font-size: 1.5rem; 
   padding: 5px 10px;
   border: 1px solid transparent; 
-  border-radius: 5px;
+  border-radius: 7px;
   text-decoration: none; 
   transition: all 0.3s ease;
 }
@@ -73,4 +73,23 @@
   color: #d4a373; 
   text-shadow: 0 0 5px #d4a373; 
   border: 1px solid transparent; 
+}
+
+.admin-link{
+  color: #ffffff; 
+  border: 1px solid transparent; 
+  background: transparent; 
+  transition: all 0.3s ease;
+  padding: 5px 15px; 
+  border-radius: 5px;
+  font-size: 1.2rem; 
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.admin-link:hover{
+  color: #d4a373; 
+  text-shadow: 0 0 5px #d4a373; 
+  border: 1px solid transparent; 
+  text-decoration: none;
 }
