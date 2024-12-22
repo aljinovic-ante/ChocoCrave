@@ -48,12 +48,15 @@ router.delete('/:id', authenticateAdmin, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (!user) {
+      console.log("User not found");
       return res.status(404).json({ error: 'User not found' });
     }
+    //console.log("USER TO DELETE: ", user);
+    await User.findByIdAndDelete(req.params.id);
 
-    await user.remove();
     res.json({ message: 'User deleted successfully' });
   } catch (error) {
+    console.error("Error during user deletion:", error);
     res.status(500).json({ error: 'Failed to delete user' });
   }
 });
