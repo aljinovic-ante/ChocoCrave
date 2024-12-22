@@ -17,12 +17,23 @@ router.get('/', authenticateAdmin, async (req, res) => {
 
 router.put('/:id', authenticateAdmin, async (req, res) => {
   try {
-    const { email, isAdmin } = req.body;
+    const { username, email, isAdmin } = req.body;
     const user = await User.findById(req.params.id);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
+    const existingEmailUser = await User.findOne({ email });
+    if (existingEmailUser && existingEmailUser._id.toString() !== req.params.id) {
+      return res.status(400).json({ error: 'Email already exists' });
+    }
+
+    const existingUsernameUser = await User.findOne({ username });
+    if (existingUsernameUser && existingUsernameUser._id.toString() !== req.params.id) {
+      return res.status(400).json({ error: 'Username already exists' });
+    }
+
+    user.username = username || user.username;
     user.email = email || user.email;
     user.isAdmin = isAdmin ?? user.isAdmin;
     await user.save();

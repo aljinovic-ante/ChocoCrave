@@ -24,14 +24,15 @@ const Users = () => {
   const [newPassword, setNewPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [passwordMatchError, setPasswordMatchError] = useState('');
+  const [updateError, setUpdateError] = useState(null);
 
   const [errorModal, setErrorModal] = useState(null);
 
-  useEffect(() => {
-    if (putError) {
-      setErrorModal(`Put Error: ${putError}`);
-    }
-  }, [putError]);
+  // useEffect(() => {
+  //   if (putError) {
+  //     setErrorModal(`Put Error: ${putError}`);
+  //   }
+  // }, [putError]);
 
   useEffect(() => {
     if (deleteError) {
@@ -45,6 +46,19 @@ const Users = () => {
   //   }
   // }, [changePasswordError]);
 
+
+  const handleUpdateUser = async () => {
+    if (editUser) {
+      try {
+        await putUser(editUser._id, editUser);
+        refetchUsers();
+        handleCloseEditModal();
+      } catch (err) {
+        setUpdateError(err.message);
+      }
+    }
+  };
+
   const handleCloseErrorModal = () => {
     setErrorModal(null);
   };  
@@ -57,14 +71,6 @@ const Users = () => {
   const handleCloseEditModal = () => {
     setEditUser(null);
     setShowEditModal(false);
-  };
-
-  const handleUpdateUser = async () => {
-    if (editUser) {
-      await putUser(editUser._id, editUser);
-      refetchUsers();
-      handleCloseEditModal();
-    }
   };
 
   const handleDelete = async () => {
@@ -210,6 +216,7 @@ const Users = () => {
                   </label>
                 </>
               )}
+              {updateError && <p className="error">{updateError}</p>}
             </div>
             <div className="modal-footer">
               <button className="btn-secondary" onClick={handleCloseEditModal}>

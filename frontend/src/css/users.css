@@ -62,7 +62,9 @@
   }
   
   .btn-danger {
-    background-color: #dc3545; 
+    color:white;
+    background-color: #dc3545;
+    outline: #f9f9f9; 
   }
   
 

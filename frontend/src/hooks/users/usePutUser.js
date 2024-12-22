@@ -15,12 +15,14 @@ const usePutUser = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to update user');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to update user');
       }
 
       return await response.json();
     } catch (err) {
       setPutError(err.message);
+      throw err;
     }
   };
 
