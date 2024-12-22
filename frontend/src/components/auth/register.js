@@ -69,7 +69,7 @@ const RegisterForm = () => {
                   {error && <p style={{ color: 'red', fontWeight: 'bold', textAlign: 'center' }}>{error}</p>}
                   {passError && <p style={{ color: 'red', fontWeight: 'bold', textAlign: 'center' }}>{passError}</p>}
                   <div className="d-grid gap-2">
-                    <Button type="submit">Register</Button>
+                    <Button type="submit" style={{ color: 'white' }}>Register</Button>
                   </div>
                 </Form>
               </Card.Body>

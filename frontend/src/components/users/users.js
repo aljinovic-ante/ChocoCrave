@@ -9,25 +9,45 @@ import '../../css/users.css';
 const Users = () => {
   const { user } = useAuth();
   const { users, loading, getError, refetchUsers } = useGetUsers();
-  const { putUser, putError } = usePutUser();
-  const { deleteUser, deleteError } = useDeleteUser();
-  const { changePassword, changePasswordError } = useChangePassword();
+  let { putUser, putError } = usePutUser();
+  let { deleteUser, deleteError } = useDeleteUser();
+  let { changePassword, changePasswordError } = useChangePassword();
 
   const [editUser, setEditUser] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
 
   const [selectedUser, setSelectedUser] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [passwordMatchError, setPasswordMatchError] = useState('');
 
+  const [errorModal, setErrorModal] = useState(null);
+
   useEffect(() => {
-    if (putError) console.error('Put Error:', putError);
-    if (deleteError) console.error('Delete Error:', deleteError);
-    if (changePasswordError) console.error('Change Password Error:', changePasswordError);
-  }, [putError, deleteError, changePasswordError]);
+    if (putError) {
+      setErrorModal(`Put Error: ${putError}`);
+    }
+  }, [putError]);
+
+  useEffect(() => {
+    if (deleteError) {
+      setErrorModal(`Delete Error: ${deleteError}`);
+    }
+  }, [deleteError]);
+
+  // useEffect(() => {
+  //   if (changePasswordError) {
+  //     setErrorModal(`Change Password Error: ${changePasswordError}`);
+  //   }
+  // }, [changePasswordError]);
+
+  const handleCloseErrorModal = () => {
+    setErrorModal(null);
+  };  
 
   const handleEdit = (userData) => {
     setEditUser(userData);
@@ -47,10 +67,22 @@ const Users = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this user?')) {
-      await deleteUser(id, refetchUsers);
+  const handleDelete = async () => {
+    if (selectedUser) {
+      await deleteUser(selectedUser._id, refetchUsers);
+      setSelectedUser(null);
+      setShowDeleteModal(false);
     }
+  };
+
+  const handleShowDeleteModal = (userData) => {
+    setSelectedUser(userData);
+    setShowDeleteModal(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setSelectedUser(null);
+    setShowDeleteModal(false);
   };
 
   const handleChangePassword = (userData) => {
@@ -72,10 +104,14 @@ const Users = () => {
       setPasswordMatchError('Passwords do not match');
       return;
     }
-    await changePassword(selectedUser._id, { oldPassword, newPassword });
-    refetchUsers();
-    handleCloseChangePasswordModal();
-  };
+    try {
+      await changePassword(selectedUser._id, { oldPassword, newPassword });
+      refetchUsers();
+      handleCloseChangePasswordModal();
+    } catch (err) {
+      setPasswordMatchError('Old password is wrong');
+    }
+  };  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -87,7 +123,7 @@ const Users = () => {
 
   return (
     <div className="users-container">
-      <h1>Users Panel</h1>
+      <h1 style={{ textAlign: 'center', fontSize: '2rem', margin: '20px 0' }}>Users Panel</h1>
       <table className="users-table">
         <thead>
           <tr>
@@ -111,9 +147,11 @@ const Users = () => {
                   <button className="btn-primary" onClick={() => handleChangePassword(u)}>
                     Change Password
                   </button>
-                  <button className="btn-danger" onClick={() => handleDelete(u._id)}>
-                    Delete
-                  </button>
+                  {user.email !== u.email && (
+                    <button className="btn-danger" onClick={() => handleShowDeleteModal(u)}>
+                      Delete
+                    </button>
+                  )}
                 </div>
               </td>
             </tr>
@@ -121,30 +159,88 @@ const Users = () => {
         </tbody>
       </table>
 
+      {errorModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-header">
+              <h2>Error</h2>
+              <span className="close" onClick={handleCloseErrorModal}>&times;</span>
+            </div>
+            <div className="modal-body">
+              <p>{errorModal}</p>
+            </div>
+            <div className="modal-footer">
+              <button className="btn-primary" onClick={handleCloseErrorModal}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {showEditModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseEditModal}>&times;</span>
-            <h2>Edit User</h2>
-            {editUser && (
-              <div>
-                <label>Email</label>
-                <input
-                  type="email"
-                  value={editUser.email}
-                  onChange={(e) => setEditUser({ ...editUser, email: e.target.value })}
-                />
-                <label>
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-header">
+              <h2>Edit User</h2>
+              <span className="close" onClick={handleCloseEditModal}>&times;</span>
+            </div>
+            <div className="modal-body">
+              {editUser && (
+                <>
+                  <label>Username</label>
                   <input
-                    type="checkbox"
-                    checked={editUser.isAdmin}
-                    onChange={(e) => setEditUser({ ...editUser, isAdmin: e.target.checked })}
+                    type="text"
+                    value={editUser.username}
+                    onChange={(e) => setEditUser({ ...editUser, username: e.target.value })}
                   />
-                  Admin
-                </label>
-              </div>
-            )}
-            <button onClick={handleUpdateUser}>Update</button>
+                  <label>Email</label>
+                  <input
+                    type="email"
+                    value={editUser.email}
+                    onChange={(e) => setEditUser({ ...editUser, email: e.target.value })}
+                  />
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={editUser.isAdmin}
+                      onChange={(e) => setEditUser({ ...editUser, isAdmin: e.target.checked })}
+                    />
+                    Admin
+                  </label>
+                </>
+              )}
+            </div>
+            <div className="modal-footer">
+              <button className="btn-secondary" onClick={handleCloseEditModal}>
+                Cancel
+              </button>
+              <button className="btn-primary" onClick={handleUpdateUser}>
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showDeleteModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-header">
+              <h2>Confirm Delete</h2>
+              <span className="close" onClick={handleCloseDeleteModal}>&times;</span>
+            </div>
+            <div className="modal-body">
+              Are you sure you want to delete this user?
+            </div>
+            <div className="modal-footer">
+              <button className="btn-secondary" onClick={handleCloseDeleteModal}>
+                Cancel
+              </button>
+              <button className="btn-danger" onClick={handleDelete}>
+                Confirm
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -188,7 +284,6 @@ const Users = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

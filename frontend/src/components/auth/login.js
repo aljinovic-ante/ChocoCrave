@@ -45,7 +45,7 @@ const LoginForm = () => {
                   </Form.Group>
                   {error && <p style={{ color: 'red', fontWeight: 'bold', textAlign: 'center' }}>{error}</p>}
                   <div className="d-grid">
-                    <Button type="submit">Login</Button>
+                    <Button type="submit" style={{ color: 'white' }}>Login</Button>
                   </div>
                 </Form>
               </Card.Body>

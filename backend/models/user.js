@@ -15,6 +15,11 @@ userSchema.pre('save', async function (next) {
     return next();
   }
 
+  const isHashed = /^\$2[aby]\$/.test(user.password);
+  if (isHashed) {
+    return next();
+  }
+
   try {
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);

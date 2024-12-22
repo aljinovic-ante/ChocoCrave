@@ -12,7 +12,6 @@ const authenticateAdmin = async (req, res, next) => {
 
   try {
     const verified = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('Verified user:', verified);
 
     if (!verified.isAdmin) {
       console.log('User is not admin:', verified);
@@ -22,7 +21,6 @@ const authenticateAdmin = async (req, res, next) => {
     }
 
     req.user = verified;
-    console.log('Admin authenticated');
     next();
   } catch (err) {
     console.log('Invalid token:', err.message);

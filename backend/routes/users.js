@@ -62,8 +62,10 @@ router.put('/:id/change-password', authenticateAdmin, async (req, res) => {
     }
 
     const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(newPassword, salt);
-    await user.save();
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    user.password = hashedPassword;
+
+    await user.save({ validateBeforeSave: false });
 
     res.json({ message: 'Password changed successfully' });
   } catch (error) {
