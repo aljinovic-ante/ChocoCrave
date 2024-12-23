@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useGetManufacturers from '../../hooks/manufacturers/useGetManufacturers';
 import useDeleteManufacturer from '../../hooks/manufacturers/useDeleteManufacturer';
+import ManufacturerCard from './manufacturerCard.js';
 import { useAuth } from '../../context/AuthContext';
 import '../../css/manufacturers.css';
 
@@ -27,36 +28,21 @@ const Manufacturers = () => {
   return (
     <div className="manufacturers-container">
       <div className="header">
-        <h2>Manufacturers</h2>
+        <h2 className="header-title">All Manufacturers</h2>
         {user && user.isAdmin && (
           <Link to="/manufacturers/create" className="create-button">
-            Create a Manufacturer
+            Add a Manufacturer
           </Link>
         )}
       </div>
       <div className="list-container">
         {manufacturers.map((manufacturer) => (
-          <div className="manufacturer-item" key={manufacturer._id}>
-          {manufacturer.image && (
-            <img src={manufacturer.image} alt={`${manufacturer.name} logo`} className="manufacturer-logo" />
-          )}
-          <p className="manufacturer-name">{manufacturer.name}</p>
-          <div className="manufacturer-actions">
-            <Link to={`/manufacturers/${manufacturer._id}`} className="view-button">View</Link>
-            {user && user.isAdmin && (
-              <>
-                <Link to={`/manufacturers/edit/${manufacturer._id}`} className="edit-button">Edit</Link>
-                <button
-                  onClick={() => handleDeleteManufacturer(manufacturer._id)}
-                  className="delete-button"
-                >
-                  Delete
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-        
+          <ManufacturerCard
+            key={manufacturer._id}
+            manufacturer={manufacturer}
+            user={user}
+            handleDeleteManufacturer={handleDeleteManufacturer}
+          />
         ))}
       </div>
     </div>

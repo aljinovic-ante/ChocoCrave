@@ -1,25 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../../css/manufacturers.css';
 
-const ManufacturerCard = ({ manufacturer, onDelete }) => {
+const ManufacturerCard = ({ manufacturer, user, handleDeleteManufacturer }) => {
   return (
-    <div className="manufacturer-card">
-      <h3>{manufacturer.name}</h3>
-      <p>{manufacturer.location}</p>
-      <p>{manufacturer.description}</p>
+    <div className="manufacturer-item" key={manufacturer._id}>
       {manufacturer.image && (
-        <img src={manufacturer.image} alt={manufacturer.name} style={{ width: '100%' }} />
+        <img
+          src={manufacturer.image}
+          alt={`${manufacturer.name} logo`}
+          className="manufacturer-logo"
+        />
       )}
-      <div className="actions">
-        <Link to={`/manufacturers/${manufacturer._id}`} className="view-link">
-          View Details
-        </Link>
-        <Link to={`/manufacturers/edit/${manufacturer._id}`} className="edit-link">
-          Edit
-        </Link>
-        <button onClick={onDelete} className="delete-button">
-          Delete
-        </button>
+      <p className="manufacturer-name">{manufacturer.name}</p>
+      <div className="manufacturer-actions">
+        <Link to={`/manufacturers/${manufacturer._id}`} className="view-button">View</Link>
+        {user && user.isAdmin && (
+          <>
+            <Link to={`/manufacturers/edit/${manufacturer._id}`} className="edit-button">Edit</Link>
+            <button
+              onClick={() => handleDeleteManufacturer(manufacturer._id)}
+              className="delete-button"
+            >
+              Delete
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
