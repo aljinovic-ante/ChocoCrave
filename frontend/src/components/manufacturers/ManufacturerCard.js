@@ -17,17 +17,6 @@ const ManufacturerCard = ({ manufacturer, user, handleDeleteManufacturer }) => {
       </Link>
       <div className="manufacturer-actions">
         <Link to={`/manufacturers/${manufacturer._id}`} className="view-button">Details</Link>
-        {user && user.isAdmin && (
-          <>
-            <Link to={`/manufacturers/edit/${manufacturer._id}`} className="edit-button">Edit</Link>
-            <button
-              onClick={() => handleDeleteManufacturer(manufacturer._id)}
-              className="delete-button"
-            >
-              Delete
-            </button>
-          </>
-        )}
       </div>
     </div>
   );

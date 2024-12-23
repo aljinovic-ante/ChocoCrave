@@ -9,13 +9,6 @@ import '../../css/manufacturers.css';
 const Manufacturers = () => {
   const { user } = useAuth();
   const { manufacturers, loading, error, refetchManufacturers } = useGetManufacturers();
-  const { deleteManufacturer } = useDeleteManufacturer();
-
-  const handleDeleteManufacturer = async (id) => {
-    if (window.confirm('Are you sure you want to delete this manufacturer?')) {
-      deleteManufacturer(id, refetchManufacturers);
-    }
-  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -41,7 +34,6 @@ const Manufacturers = () => {
             key={manufacturer._id}
             manufacturer={manufacturer}
             user={user}
-            handleDeleteManufacturer={handleDeleteManufacturer}
           />
         ))}
       </div>

@@ -64,11 +64,76 @@ h2 {
 }
 
 .details-content a {
-  color: #007bff;
+  color: #ffffff;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .details-content a:hover {
-  color: #0056b3;
+  color: #ffffff;
+}
+.admin-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button{
+  background-color: #1347a6;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.delete-button {
+  background-color: #1347a6;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #002d5d;
+}
+
+.delete-button {
+  color:white;
+  background-color: #dc3545;
+  outline: #f9f9f9; 
+}
+
+.delete-button:hover {
+  background-color: #b52a36;
+  outline: #f9f9f9; 
+  color:white;
+}
+
+.btn-danger {
+  color: white;
+  background-color: #dc3545;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-danger:hover {
+  background-color: #b52a36;
+  transform: translateY(-2px);
+}
+
+.btn-danger:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
 }
