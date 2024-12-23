@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Manufacturers from './components/manufacturers/manufacturers';
+import ManufacturerDetails from './components/manufacturers/manufacturerDetails';
 import RegisterForm from './components/auth/register';
 import LoginForm from './components/auth/login';
 import { AuthProvider } from './context/AuthContext';
@@ -29,6 +30,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Users />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/manufacturers/:id"
+            element={
+              <PrivateRoute>
+                <ManufacturerDetails />
               </PrivateRoute>
             }
           />

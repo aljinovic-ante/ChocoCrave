@@ -1,0 +1,74 @@
+.manufacturer-details-container {
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  background-color: #663f2f;
+  min-height: 100vh;
+  color: #333;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #4e2c20;
+}
+
+.details-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.details-image {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.details-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.details-content {
+  flex: 2 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.details-content h3 {
+  font-size: 2rem;
+  color: #4e2c20;
+  margin-bottom: 10px;
+}
+
+.details-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.details-content strong {
+  font-weight: bold;
+}
+
+.details-content a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.details-content a:hover {
+  color: #0056b3;
+}
