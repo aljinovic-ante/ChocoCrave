@@ -206,14 +206,18 @@ const Users = () => {
                     value={editUser.email}
                     onChange={(e) => setEditUser({ ...editUser, email: e.target.value })}
                   />
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={editUser.isAdmin}
-                      onChange={(e) => setEditUser({ ...editUser, isAdmin: e.target.checked })}
-                    />
-                    Admin
-                  </label>
+                  {user.id !== editUser._id && (
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={editUser.isAdmin}
+                        onChange={(e) =>
+                          setEditUser({ ...editUser, isAdmin: e.target.checked })
+                        }
+                      />
+                      Admin
+                    </label>
+                  )}
                 </>
               )}
               {updateError && <p className="error">{updateError}</p>}
