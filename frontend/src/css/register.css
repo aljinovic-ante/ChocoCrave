@@ -8,6 +8,10 @@
   width: 100%;
   height: 100vh; 
   background-color: #4e2c20;  
+  background-image: url('cokolada.jpg');
+  background-size: auto;
+  background-repeat: repeat;
+  background-position: top left;
   margin: 0; 
   padding: 0;
   overflow: hidden;

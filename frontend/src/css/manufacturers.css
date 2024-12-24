@@ -4,10 +4,14 @@
     gap: 20px;
     justify-items: center;
   }
-  .manufacturers-container{
+  .manufacturers-container {
     background-color: rgba(44, 13, 4, 0.923);
+    background-image: url('cokolada.jpg');
+    background-size: auto;
+    background-repeat: repeat;
+    background-position: top left;
     height: 100vh;
-  }
+  }  
   .manufacturer-item {
     display: flex;
     flex-direction: column;
