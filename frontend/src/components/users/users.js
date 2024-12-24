@@ -129,7 +129,7 @@ const Users = () => {
 
   return (
     <div className="users-container">
-      <h1 style={{ textAlign: 'center', fontSize: '2rem', margin: '20px 0' }}>Users Panel</h1>
+      <h1 style={{ textAlign: 'center', fontSize: '2rem', margin: '20px 0', color: 'white' }}>All Users</h1>
       <table className="users-table">
         <thead>
           <tr>

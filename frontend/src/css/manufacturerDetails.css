@@ -2,6 +2,10 @@
   font-family: 'Arial', sans-serif;
   padding: 20px;
   background-color: #663f2f;
+  background-image: url('./cokolada.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   min-height: 100vh;
   color: #333;
 }
