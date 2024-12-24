@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Manufacturers from './components/manufacturers/manufacturers';
 import ManufacturerDetails from './components/manufacturers/manufacturerDetails';
+import EditManufacturer from './components/manufacturers/editManufacturer';
 import RegisterForm from './components/auth/register';
 import LoginForm from './components/auth/login';
 import { AuthProvider } from './context/AuthContext';
@@ -38,6 +39,14 @@ function App() {
             element={
               <PrivateRoute>
                 <ManufacturerDetails />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/manufacturers/edit/:id"
+            element={
+              <PrivateRoute>
+                <EditManufacturer />
               </PrivateRoute>
             }
           />

@@ -9,7 +9,7 @@ const EditManufacturer = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const { manufacturer, loading, getError } = useGetManufacturer(id);
-  const { putManufacturer, putError } = usePutManufacturer(id, manufacturer);
+  const { putManufacturer, putError } = usePutManufacturer();
 
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
@@ -27,7 +27,7 @@ const EditManufacturer = () => {
       description,
       website,
     };
-    putManufacturer(id, manufacturerData);
+    await putManufacturer(id, manufacturerData);
   };
 
   useEffect(() => {
@@ -41,7 +41,12 @@ const EditManufacturer = () => {
   }, [manufacturer]);
 
   if (!user || !user.isAdmin) {
-    return <h1 style={{ textAlign: 'center', marginTop: '50px' }}>Only admin access allowed</h1>;
+    return (
+      <div className="edit-manufacturer-container">
+        <h2 style={{ textAlign: 'center', color: 'white' }}>Access Denied</h2>
+        <p style={{ textAlign: 'center', color: '#ccc' }}>Admin access is required to edit manufacturers.</p>
+      </div>
+    );
   }
 
   if (loading) {
@@ -54,67 +59,77 @@ const EditManufacturer = () => {
 
   return (
     <div className="edit-manufacturer-container">
-      <h2 className="title">Edit Manufacturer</h2>
-      <form className="edit-manufacturer-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter name"
+      <h2 className="title">Edit details about: <bold>{manufacturer.name}</bold></h2>
+      <hr
+        style={{
+          border: 'none',
+          height: '3px',
+          backgroundColor: 'white',
+          margin: '20px 0',
+        }}
+      />
+      <div className="details-wrapper">
+        <div className="details-image">
+          <img
+            src={image || manufacturer.image}
+            alt={name || manufacturer.name}
+            className="manufacturer-image"
           />
         </div>
-
-        <div className="form-group">
-          <label htmlFor="location">Location</label>
-          <input
-            id="location"
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Enter location"
-          />
+        <div className="details-content">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter name"
+              />
+            </div>
+            <div className="form-group">
+              <label>Location</label>
+              <input
+                type="text"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                placeholder="Enter location"
+              />
+            </div>
+            <div className="form-group">
+              <label>Image URL</label>
+              <input
+                type="text"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                placeholder="Enter image URL"
+              />
+            </div>
+            <div className="form-group">
+              <label>Description</label>
+              <textarea
+                rows="4"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Enter description"
+              />
+            </div>
+            <div className="form-group">
+              <label>Website</label>
+              <input
+                type="text"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                placeholder="Enter website URL"
+              />
+            </div>
+            {putError && <p className="error-text">{putError}</p>}
+            <button type="submit" className="submit-button">
+              Update
+            </button>
+          </form>
         </div>
-
-        <div className="form-group">
-          <label htmlFor="image">Image</label>
-          <input
-            id="image"
-            type="text"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-            placeholder="Enter image URL"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows="3"
-            placeholder="Enter description"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="website">Website</label>
-          <input
-            id="website"
-            type="text"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-            placeholder="Enter website URL"
-          />
-        </div>
-
-        {putError && <p className="error-text">{putError}</p>}
-
-        <button type="submit" className="submit-button">Update</button>
-      </form>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 const express = require('express');
 const Manufacturer = require('../models/manufacturer.js');
-const { authenticateUser } = require('../middleware/requireAuth');
-const { authenticateAdmin } = require('../middleware/requireAdmin');
+const authenticateUser = require('../middleware/requireAuth');
+const authenticateAdmin = require('../middleware/requireAdmin');
 
 const router = express.Router();
 

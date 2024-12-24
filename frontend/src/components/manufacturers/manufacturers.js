@@ -28,6 +28,14 @@ const Manufacturers = () => {
           </Link>
         )}
       </div>
+      <hr
+        style={{
+          border: 'none',
+          height: '3px',
+          backgroundColor: 'white',
+          margin: '20px 0',
+        }}
+      />
       <div className="list-container">
         {manufacturers.map((manufacturer) => (
           <ManufacturerCard
