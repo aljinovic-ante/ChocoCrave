@@ -1,0 +1,222 @@
+.chocolate-details-container {
+  background-color: rgba(44, 13, 4, 0.923);
+  background-image: url('./cokolada.jpg');
+  background-size: auto;
+  background-repeat: repeat;
+  background-position: top left;
+  min-height: 100vh;
+  margin-top: 0px;
+}
+
+.chocolate-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #f8efd4;
+  margin-bottom: 20px;
+}
+
+.details-wrapper {
+  display: flex;
+  gap: 20px;
+  max-width: 1000px;
+  border: 5px solid rgba(44, 13, 4, 0.923);
+}
+
+.details-image {
+  flex: 1;
+  max-width: 300px;
+}
+
+.chocolate-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.no-image-text {
+  font-size: 1.5rem;
+  text-align: center;
+  color: #f44336;
+}
+
+.details-content {
+  flex: 2;
+}
+
+.info-text {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.nutrition-info {
+  margin-top: 20px;
+}
+
+.nutrition-title {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.manufacturer-link {
+  color: #1e90ff;
+  text-decoration: underline;
+}
+
+.manufacturer-link:hover {
+  color: #0d6efd;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.edit-button,
+.delete-button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.edit-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #45a049;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.cancel-button {
+  background: #ccc;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.confirm-delete-button {
+  background: #f44336;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.nutrition-info {
+  flex: 1;
+  max-width: 250px;
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px solid #d4a373;
+  border-radius: 10px;
+  color: white;
+  background-color: rgba(44, 13, 4, 0.923);
+}
+
+.special-div {
+  flex: 1;
+  max-width: 300px;
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px solid #d4a373;
+  border-radius: 10px;
+  color: white;
+  background-color: rgba(44, 13, 4, 0.923);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
+.edit-button2,
+.delete-button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 2px solid;
+  background-color: white;
+}
+
+.edit-button2 {
+  color: #007bff;
+  border-color: #007bff;
+}
+
+.edit-button2:hover {
+  background-color: #f0f8ff;
+}
+
+.delete-button {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.delete-button:hover {
+  background-color: #f8d7da;
+}
+
+.info-main {
+  max-width: 600px;
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px solid #d4a373;
+  border-radius: 10px;
+  color:white;
+  background-color: rgba(44, 13, 4, 0.923);
+}
+
+.nutrition-title {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #f8efd4;
+}
+.very-special-div{
+display: flex;
+flex-direction: row;
+gap: 20px;
+}

@@ -11,6 +11,7 @@ import Navbar from './components/common/navbar';
 import Users from './components/users/users';
 import AddManufacturer from './components/manufacturers/addManufacturer';
 import Chocolates from './components/chocolates/chocolates';
+import ChocolateDetails from './components/chocolates/chocolateDetails';
 
 function App() {
   return (
@@ -49,6 +50,14 @@ function App() {
             element={
               <PrivateRoute>
                 <ManufacturerDetails />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/chocolates/:id"
+            element={
+              <PrivateRoute>
+                <ChocolateDetails />
               </PrivateRoute>
             }
           />

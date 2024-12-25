@@ -1,0 +1,56 @@
+[
+    {
+      "name": "Milk Chocolate",
+      "price": 2.99,
+      "cocoa_percentage": 40,
+      "color": "Brown",
+      "type": "Milk",
+      "weight": "100g",
+      "manufacturer_id": "675def136a2d3976706ae276",
+      "description": "Smooth and creamy milk chocolate with a perfect balance of cocoa and sweetness.",
+      "image": "https://example.com/milk-chocolate.jpg",
+      "nutritional_info": {
+        "calories": 530,
+        "fat": 30,
+        "protein": 7,
+        "carbohydrates": 55,
+        "sugar": 45
+      }
+    },
+    {
+      "name": "Dark Chocolate 70%",
+      "price": 3.99,
+      "cocoa_percentage": 70,
+      "color": "Dark Brown",
+      "type": "Dark",
+      "weight": "100g",
+      "manufacturer_id": "675def136a2d3976706ae276",
+      "description": "Rich and intense dark chocolate with 70% cocoa, perfect for connoisseurs.",
+      "image": "https://example.com/dark-chocolate-70.jpg",
+      "nutritional_info": {
+        "calories": 600,
+        "fat": 35,
+        "protein": 8,
+        "carbohydrates": 50,
+        "sugar": 25
+      }
+    },
+    {
+      "name": "White Chocolate",
+      "price": 3.49,
+      "cocoa_percentage": 0,
+      "color": "White",
+      "type": "White",
+      "weight": "100g",
+      "manufacturer_id": "675def136a2d3976706ae276",
+      "description": "Velvety and sweet white chocolate with hints of vanilla.",
+      "image": "https://example.com/white-chocolate.jpg",
+      "nutritional_info": {
+        "calories": 550,
+        "fat": 33,
+        "protein": 6,
+        "carbohydrates": 55,
+        "sugar": 50
+      }
+    }
+  ]  
