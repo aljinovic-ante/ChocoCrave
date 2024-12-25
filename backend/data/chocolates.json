@@ -1,56 +1,164 @@
 [
-    {
-      "name": "Milk Chocolate",
-      "price": 2.99,
-      "cocoa_percentage": 40,
-      "color": "Brown",
-      "type": "Milk",
-      "weight": "100g",
-      "manufacturer_id": "675def136a2d3976706ae276",
-      "description": "Smooth and creamy milk chocolate with a perfect balance of cocoa and sweetness.",
-      "image": "https://example.com/milk-chocolate.jpg",
-      "nutritional_info": {
-        "calories": 530,
-        "fat": 30,
-        "protein": 7,
-        "carbohydrates": 55,
-        "sugar": 45
-      }
-    },
-    {
-      "name": "Dark Chocolate 70%",
-      "price": 3.99,
-      "cocoa_percentage": 70,
-      "color": "Dark Brown",
-      "type": "Dark",
-      "weight": "100g",
-      "manufacturer_id": "675def136a2d3976706ae276",
-      "description": "Rich and intense dark chocolate with 70% cocoa, perfect for connoisseurs.",
-      "image": "https://example.com/dark-chocolate-70.jpg",
-      "nutritional_info": {
-        "calories": 600,
-        "fat": 35,
-        "protein": 8,
-        "carbohydrates": 50,
-        "sugar": 25
-      }
-    },
-    {
-      "name": "White Chocolate",
-      "price": 3.49,
-      "cocoa_percentage": 0,
-      "color": "White",
-      "type": "White",
-      "weight": "100g",
-      "manufacturer_id": "675def136a2d3976706ae276",
-      "description": "Velvety and sweet white chocolate with hints of vanilla.",
-      "image": "https://example.com/white-chocolate.jpg",
-      "nutritional_info": {
-        "calories": 550,
-        "fat": 33,
-        "protein": 6,
-        "carbohydrates": 55,
-        "sugar": 50
-      }
+  {
+    "name": "Milk Chocolate",
+    "price": 2.99,
+    "cocoa_percentage": 40,
+    "color": "Brown",
+    "type": "Milk",
+    "weight": "100g",
+    "manufacturer_id": "675def136a2d3976706ae276",
+    "description": "Smooth and creamy milk chocolate with a perfect balance of cocoa and sweetness.",
+    "image": "https://example.com/milk-chocolate.jpg",
+    "nutritional_info": {
+      "calories": 530,
+      "fat": 30,
+      "protein": 7,
+      "carbohydrates": 55,
+      "sugar": 45
     }
-  ]  
+  },
+  {
+    "name": "Dark Chocolate 70%",
+    "price": 3.99,
+    "cocoa_percentage": 70,
+    "color": "Dark Brown",
+    "type": "Dark",
+    "weight": "100g",
+    "manufacturer_id": "675def136a2d3976706ae279",
+    "description": "Rich and intense dark chocolate with 70% cocoa, perfect for connoisseurs.",
+    "image": "https://example.com/dark-chocolate-70.jpg",
+    "nutritional_info": {
+      "calories": 600,
+      "fat": 35,
+      "protein": 8,
+      "carbohydrates": 50,
+      "sugar": 25
+    }
+  },
+  {
+    "name": "White Chocolate",
+    "price": 3.49,
+    "cocoa_percentage": 0,
+    "color": "White",
+    "type": "White",
+    "weight": "100g",
+    "manufacturer_id": "675def136a2d3976706ae279",
+    "description": "Velvety and sweet white chocolate with hints of vanilla.",
+    "image": "https://example.com/white-chocolate.jpg",
+    "nutritional_info": {
+      "calories": 550,
+      "fat": 33,
+      "protein": 6,
+      "carbohydrates": 55,
+      "sugar": 50
+    }
+  },
+  {
+    "name": "Milk Chocolate with Almonds",
+    "price": 4.49,
+    "cocoa_percentage": 40,
+    "color": "Brown",
+    "type": "Milk",
+    "weight": "100g",
+    "manufacturer_id": "675def136a2d3976706ae27d",
+    "description": "Milk chocolate with crunchy almond pieces for added texture.",
+    "image": "https://example.com/milk-chocolate-almonds.jpg",
+    "nutritional_info": {
+      "calories": 570,
+      "fat": 32,
+      "protein": 8,
+      "carbohydrates": 55,
+      "sugar": 48
+    }
+  },
+  {
+    "name": "Dark Chocolate 85%",
+    "price": 4.99,
+    "cocoa_percentage": 85,
+    "color": "Very Dark Brown",
+    "type": "Dark",
+    "weight": "100g",
+    "manufacturer_id": "675def136a2d3976706ae27d",
+    "description": "Pure, intense dark chocolate with 85% cocoa, a bold choice for dark chocolate lovers.",
+    "image": "https://example.com/dark-chocolate-85.jpg",
+    "nutritional_info": {
+      "calories": 650,
+      "fat": 38,
+      "protein": 10,
+      "carbohydrates": 50,
+      "sugar": 15
+    }
+  },
+  {
+    "name": "Chocolate with Orange",
+    "price": 3.79,
+    "cocoa_percentage": 60,
+    "color": "Brown",
+    "type": "Dark",
+    "weight": "100g",
+    "manufacturer_id": "675def136a2d3976706ae27e",
+    "description": "Dark chocolate with refreshing orange flavor pieces.",
+    "image": "https://example.com/chocolate-orange.jpg",
+    "nutritional_info": {
+      "calories": 590,
+      "fat": 35,
+      "protein": 7,
+      "carbohydrates": 54,
+      "sugar": 40
+    }
+  },
+  {
+    "name": "Milk Chocolate with Hazelnuts",
+    "price": 4.29,
+    "cocoa_percentage": 45,
+    "color": "Brown",
+    "type": "Milk",
+    "weight": "100g",
+    "manufacturer_id": "675def136a2d3976706ae27e",
+    "description": "Milk chocolate mixed with roasted hazelnuts for a rich taste.",
+    "image": "https://example.com/milk-chocolate-hazelnuts.jpg",
+    "nutritional_info": {
+      "calories": 600,
+      "fat": 33,
+      "protein": 7,
+      "carbohydrates": 58,
+      "sugar": 50
+    }
+  },
+  {
+    "name": "Mint Chocolate",
+    "price": 3.99,
+    "cocoa_percentage": 50,
+    "color": "Greenish Brown",
+    "type": "Dark",
+    "weight": "100g",
+    "manufacturer_id": "675def136a2d3976706ae27b",
+    "description": "Dark chocolate infused with refreshing mint flavor.",
+    "image": "https://example.com/mint-chocolate.jpg",
+    "nutritional_info": {
+      "calories": 560,
+      "fat": 30,
+      "protein": 7,
+      "carbohydrates": 60,
+      "sugar": 45
+    }
+  },
+  {
+    "name": "Caramel Chocolate",
+    "price": 4.19,
+    "cocoa_percentage": 55,
+    "color": "Golden Brown",
+    "type": "Milk",
+    "weight": "100g",
+    "manufacturer_id": "675def136a2d3976706ae27b",
+    "description": "Delicious milk chocolate filled with creamy caramel.",
+    "image": "https://example.com/caramel-chocolate.jpg",
+    "nutritional_info": {
+      "calories": 650,
+      "fat": 35,
+      "protein": 8,
+      "carbohydrates": 60,
+      "sugar": 55
+    }
+  }
+]

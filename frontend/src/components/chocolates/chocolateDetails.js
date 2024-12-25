@@ -14,20 +14,24 @@ const ChocolateDetails = () => {
   const { deleteChocolate } = useDeleteChocolate();
   const { refetchChocolates } = useGetChocolates();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const handleDelete = async () => {
     try {
       await deleteChocolate(chocolate._id, refetchChocolates);
       setShowDeleteModal(false);
-      navigate('/');
+      setShowSuccessModal(true);
     } catch (err) {
       console.error('Failed to delete chocolate:', err.message);
+      setShowDeleteModal(false);
+      setShowErrorModal(true);
     }
   };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  console.log("ID: ",chocolate.manufacturer_id)
+
   return (
     <div className="chocolate-details-container">
       <h2 className="chocolate-title">{chocolate.name}</h2>
@@ -72,55 +76,80 @@ const ChocolateDetails = () => {
                 <p className="info-text"><strong>Sugar:</strong> {chocolate.nutritional_info.sugar || 'N/A'} g</p>
               </div>
             )}
-          <div className="special-div">
-            <p className="info-text">
-              <strong>Manufacturer: {chocolate.manufacturer_id.name}</strong>
-            </p>
-            <Link
-              to={`/manufacturers/${chocolate.manufacturer_id._id}`}
-              className="manufacturer-link22"
-              style={{
-                display: 'inline-block', 
-                padding: '10px 20px',
-                border: '2px solid #ffffff',
-                backgroundColor: 'rgb(200,165,158)',
-                color: '#ffffff',
-                textAlign: 'center',
-                textDecoration: 'none',
-                borderRadius: '5px',
-                fontSize: '1rem',
-                cursor: 'pointer',
-                transition: 'background-color 0.3s, color 0.3s', 
-              }}
-              onMouseOver={(e) => {
-                e.target.style.backgroundColor = 'rgb(138,109,102)';
-                e.target.style.color = 'white';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.backgroundColor = 'rgb(200,165,158)';
-                e.target.style.color = 'white';
-              }}
-            >
-              {chocolate.manufacturer_id.name} Info
-            </Link>
-            {user?.isAdmin && (
-              <div className="admin-actions">
-                <Link
-                  to={`/chocolates/edit/${id}`}
-                  className="edit-button2"
-                  style={{ color: '#007bff', textDecoration: 'none' }}
-                >
-                  Edit Product
-                </Link>
-                <button onClick={() => setShowDeleteModal(true)} className="delete-button">
-                  Delete Product
-                </button>
-              </div>
-            )}
-          </div>
+            <div className="special-div">
+              <p className="info-text">
+                <strong>Manufacturer: {chocolate.manufacturer_id.name}</strong>
+              </p>
+              <Link
+                to={`/manufacturers/${chocolate.manufacturer_id._id}`}
+                className="manufacturer-link22"
+                style={{
+                  display: 'inline-block',
+                  padding: '10px 20px',
+                  border: '2px solid #ffffff',
+                  backgroundColor: 'rgb(200,165,158)',
+                  color: '#ffffff',
+                  textAlign: 'center',
+                  textDecoration: 'none',
+                  borderRadius: '5px',
+                  fontSize: '1rem',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.3s, color 0.3s',
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = 'rgb(138,109,102)';
+                  e.target.style.color = 'white';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = 'rgb(200,165,158)';
+                  e.target.style.color = 'white';
+                }}
+              >
+                {chocolate.manufacturer_id.name} Info
+              </Link>
+              {user?.isAdmin && (
+                <div className="admin-actions">
+                  <Link
+                    to={`/chocolates/edit/${id}`}
+                    className="edit-button2"
+                    style={{ color: '#007bff', textDecoration: 'none' }}
+                  >
+                    Edit Product
+                  </Link>
+                  <button onClick={() => setShowDeleteModal(true)} className="delete-button">
+                    Delete Product
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
+
+      {showSuccessModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>Deletion Successful</h3>
+            <p>The chocolate <strong>{chocolate.name}</strong> was deleted successfully.</p>
+            <div className="modal-actions">
+              <button onClick={() => navigate('/')} className="cancel-button">Go Back</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showErrorModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>Deletion Failed</h3>
+            <p>There was an error while deleting the chocolate <strong>{chocolate.name}</strong>.</p>
+            <div className="modal-actions">
+              <button onClick={() => setShowErrorModal(false)} className="cancel-button">Close</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {showDeleteModal && (
         <div className="modal-overlay">
           <div className="modal">
