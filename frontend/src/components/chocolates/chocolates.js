@@ -35,7 +35,7 @@ const Chocolates = () => {
           margin: '20px 0',
         }}
       />
-      <div className="list-container">
+      <div className="list-container2">
         {chocolates.map((chocolate) => (
           <ChocolateCard
             key={chocolate._id}

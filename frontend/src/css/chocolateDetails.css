@@ -1,4 +1,5 @@
 .chocolate-details-container {
+  height: 110vh;
   background-color: rgba(44, 13, 4, 0.923);
   background-image: url('./cokolada.jpg');
   background-size: auto;
@@ -6,13 +7,14 @@
   background-position: top left;
   min-height: 100vh;
   margin-top: 0px;
+  padding-top: 1px;
 }
 
 .chocolate-title {
   text-align: center;
   font-size: 2.5rem;
   font-weight: bold;
-  color: #f8efd4;
+  color: #ffffff;
   margin-bottom: 20px;
 }
 
@@ -197,6 +199,7 @@
 }
 
 .delete-button:hover {
+  color: #dc3545;
   background-color: #f8d7da;
 }
 
