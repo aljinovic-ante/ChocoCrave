@@ -9,7 +9,7 @@ const ChocolateCard = ({ chocolate, user, handleDeleteChocolate }) => {
       : null;
 
   return (
-    <div className="manufacturer-item" key={chocolate._id}>
+    <div className="manufacturer-item2" key={chocolate._id}>
       <Link to={`/chocolates/${chocolate._id}`} className="manufacturer-link">
         {chocolate.image && (
           <img

@@ -19,7 +19,7 @@ const ChocolateDetails = () => {
     try {
       await deleteChocolate(chocolate._id, refetchChocolates);
       setShowDeleteModal(false);
-      navigate('/chocolates');
+      navigate('/');
     } catch (err) {
       console.error('Failed to delete chocolate:', err.message);
     }
