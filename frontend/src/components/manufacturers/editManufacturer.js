@@ -131,7 +131,11 @@ const EditManufacturer = () => {
               />
             </div>
             {putError && <p className="error-text">{putError}</p>}
-            <button type="submit" className="submit-button">
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={name.trim() === ''}
+            >
               Update
             </button>
           </form>

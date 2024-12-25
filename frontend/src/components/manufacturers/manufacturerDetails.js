@@ -12,14 +12,14 @@ const ManufacturerDetails = () => {
   const { manufacturer, loading, error } = useGetManufacturer(id);
   const { user } = useAuth();
   const { deleteManufacturer } = useDeleteManufacturer();
-  const { refetchManufacturers } = useGetManufacturers(); // Access refetchManufacturers
+  const { refetchManufacturers } = useGetManufacturers();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleDelete = async () => {
     try {
       await deleteManufacturer(manufacturer._id, refetchManufacturers);
       setShowDeleteModal(false);
-      navigate('/manufacturers'); // Redirect after deletion
+      navigate('/');
     } catch (err) {
       console.error('Failed to delete manufacturer:', err.message);
     }
@@ -46,13 +46,25 @@ const ManufacturerDetails = () => {
       <h2 style={{ color: 'white', fontWeight: 'bold', textAlign: 'center' }}>Manufacturer Details</h2>
       <div className="details-wrapper">
         <div className="details-image">
-          <Link to={manufacturer.website}>
+        {manufacturer.image ? (
+          manufacturer.website ? (
+            <Link to={manufacturer.website}>
+              <img
+                src={manufacturer.image}
+                alt={`${manufacturer.name} logo`}
+                className="manufacturer-logo"
+              />
+            </Link>
+          ) : (
             <img
               src={manufacturer.image}
-              alt={manufacturer.name}
-              className="manufacturer-image"
+              alt={`${manufacturer.name} logo`}
+              className="manufacturer-logo"
             />
-          </Link>
+          )
+        ) : (
+          <p>No Logo Available</p>
+        )}
         </div>
         <div className="details-content">
           <h3>{manufacturer.name}</h3>
@@ -77,13 +89,13 @@ const ManufacturerDetails = () => {
               <span className="close" onClick={handleCloseDeleteModal}>&times;</span>
             </div>
             <div className="modal-body">
-              Are you sure you want to delete <strong>{manufacturer.name}</strong>?
+              Are you sure you want to delete {manufacturer.name}?
             </div>
             <div className="modal-footer">
               <button className="btn-secondary" onClick={handleCloseDeleteModal}>
                 Cancel
               </button>
-              <button className="btn-danger" onClick={handleDelete}>
+              <button className="btn-danger2" onClick={handleDelete}>
                 Confirm
               </button>
             </div>

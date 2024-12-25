@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const Manufacturer = require('../models/manufacturer.js');
 const authenticateUser = require('../middleware/requireAuth');
 const authenticateAdmin = require('../middleware/requireAdmin');
@@ -16,10 +17,17 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const manufacturer = await Manufacturer.findById(req.params.id);
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Invalid manufacturer ID' });
+    }
+
+    const manufacturer = await Manufacturer.findById(id);
     if (!manufacturer) {
       return res.status(404).json({ error: 'Manufacturer not found' });
     }
+
     res.json(manufacturer);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch manufacturer' });
@@ -30,6 +38,10 @@ router.put('/:id', authenticateAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const { name, location, image, description, website } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Invalid manufacturer ID' });
+    }
 
     const manufacturer = await Manufacturer.findById(id);
     if (!manufacturer) {
@@ -71,6 +83,27 @@ router.post('/', authenticateAdmin, async (req, res) => {
   } catch (error) {
     console.error('Error creating manufacturer:', error);
     res.status(500).json({ error: 'Failed to create manufacturer' });
+  }
+});
+
+router.delete('/:id', authenticateAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Invalid manufacturer ID' });
+    }
+
+    const manufacturer = await Manufacturer.findById(id);
+    if (!manufacturer) {
+      return res.status(404).json({ error: 'Manufacturer not found' });
+    }
+
+    await Manufacturer.findByIdAndDelete(id);
+    res.status(200).json({ message: 'Manufacturer deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting manufacturer:', error);
+    res.status(500).json({ error: 'Failed to delete manufacturer' });
   }
 });
 
