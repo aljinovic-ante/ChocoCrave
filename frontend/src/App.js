@@ -13,6 +13,7 @@ import AddManufacturer from './components/manufacturers/addManufacturer';
 import Chocolates from './components/chocolates/chocolates';
 import ChocolateDetails from './components/chocolates/chocolateDetails';
 import EditChocolate from './components/chocolates/editChocolate';
+import AddChocolate from './components/chocolates/addChocolate';
 
 function App() {
   return (
@@ -83,6 +84,14 @@ function App() {
             element={
               <PrivateRoute>
                 <AddManufacturer />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/chocolates/add"
+            element={
+              <PrivateRoute>
+                <AddChocolate />
               </PrivateRoute>
             }
           />

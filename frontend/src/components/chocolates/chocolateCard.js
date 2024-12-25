@@ -11,12 +11,14 @@ const ChocolateCard = ({ chocolate, user, handleDeleteChocolate }) => {
   return (
     <div className="manufacturer-item2" key={chocolate._id}>
       <Link to={`/chocolates/${chocolate._id}`} className="manufacturer-link">
-        {chocolate.image && (
-          <img
-            src={chocolate.image}
-            alt={`${chocolate.name} image`}
-            className="manufacturer-logo"
-          />
+        {chocolate.image ? (
+            <img
+              src={chocolate.image}
+              alt={`${chocolate.name} image`}
+              className="chocolate-image"
+            />
+          ) : (
+            <h3 className="no-image-text">No Image Available</h3>
         )}
         <p className="manufacturer-name">{chocolate.name}</p>
       </Link>

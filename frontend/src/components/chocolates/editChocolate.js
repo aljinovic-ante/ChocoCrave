@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useGetChocolate from '../../hooks/chocolates/useGetChocolate';
 import usePutChocolate from '../../hooks/chocolates/usePutChocolate';
+import useGetManufacturers from '../../hooks/manufacturers/useGetManufacturers';
 import { useAuth } from '../../context/AuthContext';
 import '../../css/editChocolate.css';
 
@@ -10,6 +11,7 @@ const EditChocolate = () => {
   const { user } = useAuth();
   const { chocolate, loading, getError } = useGetChocolate(id);
   const { putChocolate, putError } = usePutChocolate();
+  const { manufacturers } = useGetManufacturers();
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -19,6 +21,7 @@ const EditChocolate = () => {
   const [weight, setWeight] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
+  const [manufacturerId, setManufacturerId] = useState('');
 
   const [calories, setCalories] = useState('');
   const [fat, setFat] = useState('');
@@ -40,6 +43,7 @@ const EditChocolate = () => {
       weight,
       description,
       image,
+      manufacturer_id: manufacturerId,
       nutritional_info: {
         calories,
         fat,
@@ -72,6 +76,7 @@ const EditChocolate = () => {
       setWeight(chocolate.weight || '');
       setDescription(chocolate.description || '');
       setImage(chocolate.image || '');
+      setManufacturerId(chocolate.manufacturer_id?._id || '');
 
       const nutritionalInfo = chocolate.nutritional_info || {};
       setCalories(nutritionalInfo.calories || '');
@@ -178,6 +183,23 @@ const EditChocolate = () => {
                 placeholder="Enter image URL"
               />
             </div>
+            <div className="form-group">
+              <label>Manufacturer</label>
+              <select
+                value={manufacturerId}
+                onChange={(e) => setManufacturerId(e.target.value)}
+                required
+              >
+                <option value="" disabled>
+                  Select Manufacturer
+                </option>
+                {manufacturers.map((manufacturer) => (
+                  <option key={manufacturer._id} value={manufacturer._id}>
+                    {manufacturer.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           <div className="details-section">
@@ -232,8 +254,6 @@ const EditChocolate = () => {
               Update Information
             </button>
           </div>
-
-          
         </div>
       </form>
 

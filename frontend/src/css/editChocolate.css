@@ -164,3 +164,35 @@
 .modal button:hover {
   background-color: #0056b3;
 }
+
+.details-section select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  color: #333;
+  font-size: 1rem;
+  max-width: 400px;
+  width: calc(100% - 20px);
+  margin: 0 auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.details-section select:focus {
+  outline: none;
+  border-color: #ffaf4d;
+  box-shadow: 0 0 8px rgba(255, 175, 77, 0.5);
+}
+
+.details-section select option {
+  font-size: 1rem;
+  padding: 10px;
+}
+
+.error-text {
+  color: #ff4d4d;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
