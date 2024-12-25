@@ -20,11 +20,11 @@ const ChocolateCard = ({ chocolate, user, handleDeleteChocolate }) => {
           ) : (
             <h3 className="no-image-text">No Image Available</h3>
         )}
-        <p className="manufacturer-name">{chocolate.name}</p>
+        <p className="manufacturer-name"><strong>{chocolate.name}</strong></p>
       </Link>
-      <p className="chocolate-price">Price: {chocolate.price.toFixed(2)}€/kom</p>
+      <p className="chocolate-price">Price: <strong>{chocolate.price.toFixed(2)}€/kom</strong></p>
       {pricePerKg && (
-        <p className="chocolate-price-per-kg">Price per kg: {pricePerKg}€/kg</p>
+        <p className="chocolate-price-per-kg">Price per kg: <strong>{pricePerKg}€/kg</strong></p>
       )}
       <div className="manufacturer-actions">
         <Link to={`/chocolates/${chocolate._id}`} className="view-button">Details</Link>

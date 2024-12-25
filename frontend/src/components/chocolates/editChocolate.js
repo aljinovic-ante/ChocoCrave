@@ -121,7 +121,7 @@ const EditChocolate = () => {
               />
             </div>
             <div className="form-group">
-              <label>Price</label>
+              <label>Price (€)</label>
               <input
                 type="number"
                 value={price}
@@ -130,7 +130,7 @@ const EditChocolate = () => {
               />
             </div>
             <div className="form-group">
-              <label>Cocoa Percentage</label>
+              <label>Cocoa Percentage (%)</label>
               <input
                 type="number"
                 value={cocoaPercentage}

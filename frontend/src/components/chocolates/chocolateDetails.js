@@ -58,7 +58,7 @@ const ChocolateDetails = () => {
         <div className="details-content">
           <div className="info-main">
             <p className="info-text"><strong>Name:</strong> {chocolate.name}</p>
-            <p className="info-text"><strong>Price:</strong> ${chocolate.price?.toFixed(2) || 'N/A'}</p>
+            <p className="info-text"><strong>Price:</strong> {chocolate.price?.toFixed(2) || 'N/A'}€</p>
             <p className="info-text"><strong>Cocoa Percentage:</strong> {chocolate.cocoa_percentage || 'N/A'}%</p>
             <p className="info-text"><strong>Type:</strong> {chocolate.type || 'N/A'}</p>
             <p className="info-text"><strong>Weight:</strong> {chocolate.weight || 'N/A'}</p>
