@@ -48,16 +48,18 @@ const Users = () => {
 
 
   const handleUpdateUser = async () => {
-    if (editUser) {
-      try {
-        await putUser(editUser._id, editUser);
-        refetchUsers();
-        handleCloseEditModal();
-      } catch (err) {
-        setUpdateError(err.message);
-      }
+    if (!editUser.username || !editUser.email) {
+      setUpdateError('Username and Email cannot be empty');
+      return;
     }
-  };
+    try {
+      await putUser(editUser._id, editUser);
+      refetchUsers();
+      handleCloseEditModal();
+    } catch (err) {
+      setUpdateError(err.message);
+    }
+  };;
 
   const handleCloseErrorModal = () => {
     setErrorModal(null);
@@ -226,7 +228,11 @@ const Users = () => {
               <button className="btn-secondary" onClick={handleCloseEditModal}>
                 Cancel
               </button>
-              <button className="btn-primary" onClick={handleUpdateUser}>
+              <button
+                className="btn-primary"
+                onClick={handleUpdateUser}
+                disabled={!editUser || editUser.username.trim() === '' || editUser.email.trim() === ''}
+              >
                 Save Changes
               </button>
             </div>

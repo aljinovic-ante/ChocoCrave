@@ -50,4 +50,28 @@ router.put('/:id', authenticateAdmin, async (req, res) => {
   }
 });
 
+router.post('/', authenticateAdmin, async (req, res) => {
+  try {
+    const { name, location, image, description, website } = req.body;
+
+    if (!name || !location || !description) {
+      return res.status(400).json({ error: 'Name, location, and description are required' });
+    }
+
+    const newManufacturer = new Manufacturer({
+      name,
+      location,
+      image,
+      description,
+      website,
+    });
+
+    const savedManufacturer = await newManufacturer.save();
+    res.status(201).json({ message: 'Manufacturer created successfully', manufacturer: savedManufacturer });
+  } catch (error) {
+    console.error('Error creating manufacturer:', error);
+    res.status(500).json({ error: 'Failed to create manufacturer' });
+  }
+});
+
 module.exports = router;

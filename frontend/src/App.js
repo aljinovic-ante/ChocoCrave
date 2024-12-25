@@ -9,6 +9,7 @@ import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/auth/privateRoute';
 import Navbar from './components/common/navbar';
 import Users from './components/users/users';
+import AddManufacturer from './components/manufacturers/addManufacturer';
 
 function App() {
   return (
@@ -47,6 +48,14 @@ function App() {
             element={
               <PrivateRoute>
                 <EditManufacturer />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/manufacturers/add"
+            element={
+              <PrivateRoute>
+                <AddManufacturer />
               </PrivateRoute>
             }
           />

@@ -23,7 +23,7 @@ const Manufacturers = () => {
       <div className="header">
         <h2 className="header-title">All Manufacturers</h2>
         {user && user.isAdmin && (
-          <Link to="/manufacturers/create" className="create-button">
+          <Link to="/manufacturers/add" className="create-button">
             Add a Manufacturer
           </Link>
         )}
