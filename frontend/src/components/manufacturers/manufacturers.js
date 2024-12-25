@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useGetManufacturers from '../../hooks/manufacturers/useGetManufacturers';
-import useDeleteManufacturer from '../../hooks/manufacturers/useDeleteManufacturer';
 import ManufacturerCard from './manufacturerCard.js';
 import { useAuth } from '../../context/AuthContext';
 import '../../css/manufacturers.css';

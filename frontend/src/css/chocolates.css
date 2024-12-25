@@ -1,0 +1,50 @@
+.chocolates-container {
+    background-color: rgba(44, 13, 4, 0.923);
+    background-image: url('./cokolada.jpg');
+    background-size: auto;
+    background-repeat: repeat;
+    background-position: top left;
+    min-height: 100vh;
+  }
+  
+  .list-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px 20px;
+    justify-items: center;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 20px 20px;
+  }
+  
+  .header-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 2.2rem;
+    color: #f1efe2;
+    margin: 0 auto;
+  }
+  
+  .create-button {
+    background-color: #ffffff;
+    color: #49410c;
+    font-size: 1.3rem;
+    padding: 10px 20px;
+    border: 4px solid #758c02e9;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: absolute;
+    top: 100px;
+    right: 100px;
+  }
+  
+  .create-button:hover {
+    background-color: #f9e4a5;
+  }
+  
