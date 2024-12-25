@@ -16,6 +16,7 @@ const Navbar = () => {
     <nav className="custom-navbar">
       <div className="nav-left">
         <a href="/" className="nav-link">Home</a>
+        <a href="/manufacturers" className="nav-link">Manufacturers</a>
       </div>
 
       <p className="navbar-brand">ChocoCrave</p>
@@ -23,7 +24,7 @@ const Navbar = () => {
       <div className="nav-right">
         {user && (
           <>
-            <span className="username">Hello, {user.username}</span> 
+            <span className="username">Hello, {user.username}</span>
             <p style={{ color: 'white' }}>|</p>
             {user.isAdmin && (
               <a href="/admin" className="admin-link">Admin Panel</a>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import usePostManufacturer from '../../hooks/manufacturers/usePostManufacturer';
-import '../../css/editManufacturer.css'; // Reuse the CSS from EditManufacturer
+import '../../css/editManufacturer.css';
 
 const AddManufacturer = () => {
   const { user } = useAuth();
@@ -58,7 +58,7 @@ const AddManufacturer = () => {
           margin: '20px 0',
         }}
       />
-      <div className="details-wrapper">
+      <div className="details-wrapper2">
         <div className="details-content">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
