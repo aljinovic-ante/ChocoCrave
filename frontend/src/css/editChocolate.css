@@ -1,0 +1,166 @@
+.edit-chocolate-container {
+  background-color: rgba(44, 13, 4, 0.923);
+  background-image: url('./cokolada.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.details-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  border: 2px solid #d4a373;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.details-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: rgba(44, 13, 4, 0.923);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  min-width: 0;
+  min-height: 780px;
+}
+
+.details-section .form-group {
+  width: 100%;
+}
+
+.details-section .form-group input,
+.details-section .form-group textarea {
+  width: calc(100% - 20px);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.details-section h4 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f8efd4;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.form-group label {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #f8efd4;
+  width: 100%;
+  max-width: 400px;
+  text-align: left;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  color: #333;
+  font-size: 1rem;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #ffaf4d;
+  box-shadow: 0 0 8px rgba(255, 175, 77, 0.5);
+}
+
+.submit-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: rgba(78, 37, 37, 0.904);
+  border-radius: 5px;
+  border: solid 2px rgb(112, 112, 12);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  max-width: 400px;
+  align-self: center;
+}
+
+.submit-button:hover {
+  background-color: #c49f8c;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal p {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.modal button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal button:hover {
+  background-color: #0056b3;
+}

@@ -12,6 +12,7 @@ import Users from './components/users/users';
 import AddManufacturer from './components/manufacturers/addManufacturer';
 import Chocolates from './components/chocolates/chocolates';
 import ChocolateDetails from './components/chocolates/chocolateDetails';
+import EditChocolate from './components/chocolates/editChocolate';
 
 function App() {
   return (
@@ -66,6 +67,14 @@ function App() {
             element={
               <PrivateRoute>
                 <EditManufacturer />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/chocolates/edit/:id"
+            element={
+              <PrivateRoute>
+                <EditChocolate />
               </PrivateRoute>
             }
           />
