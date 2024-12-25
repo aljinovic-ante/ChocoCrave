@@ -27,7 +27,7 @@ const ChocolateDetails = () => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-
+  console.log("ID: ",chocolate.manufacturer_id)
   return (
     <div className="chocolate-details-container">
       <h2 className="chocolate-title">{chocolate.name}</h2>
@@ -72,26 +72,52 @@ const ChocolateDetails = () => {
                 <p className="info-text"><strong>Sugar:</strong> {chocolate.nutritional_info.sugar || 'N/A'} g</p>
               </div>
             )}
-            <div className="special-div">
-              <p className="info-text">
-                <strong>Manufacturer:</strong>{' '}
-                <Link to={`/manufacturers/${chocolate.manufacturer_id}`} className="manufacturer-link">
-                  View Manufacturer
+          <div className="special-div">
+            <p className="info-text">
+              <strong>Manufacturer: {chocolate.manufacturer_id.name}</strong>
+            </p>
+            <Link
+              to={`/manufacturers/${chocolate.manufacturer_id._id}`}
+              className="manufacturer-link22"
+              style={{
+                display: 'inline-block', 
+                padding: '10px 20px',
+                border: '2px solid #ffffff',
+                backgroundColor: 'rgb(200,165,158)',
+                color: '#ffffff',
+                textAlign: 'center',
+                textDecoration: 'none',
+                borderRadius: '5px',
+                fontSize: '1rem',
+                cursor: 'pointer',
+                transition: 'background-color 0.3s, color 0.3s', 
+              }}
+              onMouseOver={(e) => {
+                e.target.style.backgroundColor = 'rgb(138,109,102)';
+                e.target.style.color = 'white';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.backgroundColor = 'rgb(200,165,158)';
+                e.target.style.color = 'white';
+              }}
+            >
+              {chocolate.manufacturer_id.name} Info
+            </Link>
+            {user?.isAdmin && (
+              <div className="admin-actions">
+                <Link
+                  to={`/chocolates/edit/${id}`}
+                  className="edit-button2"
+                  style={{ color: '#007bff', textDecoration: 'none' }}
+                >
+                  Edit Product
                 </Link>
-              </p>
-              {user?.isAdmin && (
-                <div className="admin-actions">
-                  <Link
-                    to={`/chocolates/edit/${id}`}
-                    className="edit-button2"
-                    style={{ color: '#007bff', textDecoration: 'none' }}
-                  >
-                    Edit Product
-                  </Link>
-                  <button onClick={() => setShowDeleteModal(true)} className="delete-button">Delete Product</button>
-                </div>
-              )}
-            </div>
+                <button onClick={() => setShowDeleteModal(true)} className="delete-button">
+                  Delete Product
+                </button>
+              </div>
+            )}
+          </div>
           </div>
         </div>
       </div>
