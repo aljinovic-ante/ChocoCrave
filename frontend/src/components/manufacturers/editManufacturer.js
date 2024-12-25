@@ -8,7 +8,7 @@ import '../../css/editManufacturer.css';
 const EditManufacturer = () => {
   const { id } = useParams();
   const { user } = useAuth();
-  const { manufacturer, loading, getError } = useGetManufacturer(id);
+  const { manufacturer, loading, getError, fetchManufacturer } = useGetManufacturer(id);
   const { putManufacturer, putError } = usePutManufacturer();
 
   const [name, setName] = useState('');
@@ -17,18 +17,25 @@ const EditManufacturer = () => {
   const [description, setDescription] = useState('');
   const [website, setWebsite] = useState('');
 
+  const [modalMessage, setModalMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const manufacturerData = {
-      _id: manufacturer._id,
-      name,
-      location,
-      image,
-      description,
-      website,
-    };
-    await putManufacturer(id, manufacturerData);
+    const manufacturerData = { name, location, image, description, website };
+  
+    const success = await putManufacturer(manufacturer._id, manufacturerData);
+  
+    if (success) {
+      setModalMessage('Update completed successfully!');
+    } else {
+      setModalMessage('Update failed. Please try again.');
+    }
+  
+    setShowModal(true);
   };
+  
+  const closeModal = () => setShowModal(false);
 
   useEffect(() => {
     if (manufacturer) {
@@ -130,6 +137,14 @@ const EditManufacturer = () => {
           </form>
         </div>
       </div>
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <p>{modalMessage}</p>
+            <button onClick={closeModal}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

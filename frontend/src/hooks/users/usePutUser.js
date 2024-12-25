@@ -4,12 +4,19 @@ const usePutUser = () => {
   const [putError, setPutError] = useState(null);
 
   const putUser = async (id, userData) => {
+    setPutError(null);
     try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setPutError('No token provided');
+        throw new Error('No token provided');
+      }
+
       const response = await fetch(`http://localhost:5000/api/users/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(userData),
       });
@@ -21,7 +28,8 @@ const usePutUser = () => {
 
       return await response.json();
     } catch (err) {
-      setPutError(err.message);
+      console.error('Error updating user:', err);
+      setPutError(err.message || 'An unknown error occurred');
       throw err;
     }
   };
