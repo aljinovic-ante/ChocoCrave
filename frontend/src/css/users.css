@@ -129,9 +129,9 @@
 .modal-body input {
   padding: 8px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   border-radius: 4px;
-  width: 100%;
+  width: 95%;
 }
 
 .modal-footer {

@@ -210,6 +210,7 @@ const Users = () => {
                   />
                   {user.id !== editUser._id && (
                     <label>
+                      Admin
                       <input
                         type="checkbox"
                         checked={editUser.isAdmin}
@@ -217,7 +218,6 @@ const Users = () => {
                           setEditUser({ ...editUser, isAdmin: e.target.checked })
                         }
                       />
-                      Admin
                     </label>
                   )}
                 </>

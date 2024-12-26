@@ -8,7 +8,7 @@ import '../../css/editManufacturer.css';
 const EditManufacturer = () => {
   const { id } = useParams();
   const { user } = useAuth();
-  const { manufacturer, loading, getError, fetchManufacturer } = useGetManufacturer(id);
+  const { manufacturer, loading, getError } = useGetManufacturer(id);
   const { putManufacturer, putError } = usePutManufacturer();
 
   const [name, setName] = useState('');
@@ -23,18 +23,18 @@ const EditManufacturer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const manufacturerData = { name, location, image, description, website };
-  
+
     const success = await putManufacturer(manufacturer._id, manufacturerData);
-  
+
     if (success) {
       setModalMessage('Update completed successfully!');
     } else {
       setModalMessage('Update failed. Please try again.');
     }
-  
+
     setShowModal(true);
   };
-  
+
   const closeModal = () => setShowModal(false);
 
   useEffect(() => {
@@ -66,25 +66,18 @@ const EditManufacturer = () => {
 
   return (
     <div className="edit-manufacturer-container">
-      <h2 className="title">Edit details about: <bold>{manufacturer.name}</bold></h2>
-      <hr
-        style={{
-          border: 'none',
-          height: '3px',
-          backgroundColor: 'white',
-          margin: '20px 0',
-        }}
-      />
-      <div className="details-wrapper">
-        <div className="details-image">
-          <img
-            src={image || manufacturer.image}
-            alt={name || manufacturer.name}
-            className="manufacturer-image"
-          />
-        </div>
-        <div className="details-content">
-          <form onSubmit={handleSubmit}>
+      <h2 className="title">Edit details about: {manufacturer.name}</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="details-wrapper">
+          <div className="details-image">
+            <img
+              src={image || manufacturer.image}
+              alt={name || manufacturer.name}
+              className="manufacturer-image"
+            />
+          </div>
+          <div className="details-section">
+            <h4>{manufacturer.name} Details</h4>
             <div className="form-group">
               <label>Name</label>
               <input
@@ -131,16 +124,12 @@ const EditManufacturer = () => {
               />
             </div>
             {putError && <p className="error-text">{putError}</p>}
-            <button
-              type="submit"
-              className="submit-button"
-              disabled={name.trim() === ''}
-            >
+            <button type="submit" className="submit-button" disabled={name.trim() === ''}>
               Update
             </button>
-          </form>
+          </div>
         </div>
-      </div>
+      </form>
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
