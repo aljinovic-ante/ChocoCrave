@@ -20,7 +20,7 @@
     background-color: #f8f8f8;
     border: 1px solid #ddd;
     border-radius: 8px;
-    width: 250px;
+    width: calc(20% - 20px); /* This ensures 5 items per row with 20px gap */
     padding: 15px;
     display: flex;
     flex-direction: column;

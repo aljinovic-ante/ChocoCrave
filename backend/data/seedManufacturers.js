@@ -13,11 +13,9 @@ const readJSONFile = (fileName) => {
 const seedManufacturers = async () => {
   try {
     await mongoose.connect(MONGO_URI);
-    console.log('Connected to MongoDB');
 
     const manufacturersData = readJSONFile('manufacturers.json');
 
-    console.log('Seeding manufacturers...');
     for (const manufacturer of manufacturersData) {
       await Manufacturer.updateOne(
         { name: manufacturer.name },
@@ -25,10 +23,8 @@ const seedManufacturers = async () => {
         { upsert: true }
       );
     }
-    console.log('Manufacturers updated or inserted successfully.');
 
     await mongoose.disconnect();
-    console.log('Database seeding completed and disconnected from MongoDB');
   } catch (error) {
     console.error('Error seeding the manufacturers:', error);
     await mongoose.disconnect();

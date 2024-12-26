@@ -5,7 +5,6 @@ import '../../css/favorites.css';
 
 const Favorites = () => {
   const { user } = useAuth();
-  console.log("OVI USER NA FAVORITES STRANICI user: ",user)
   const { favorites, loading, error } = useGetFavorites(user.id);
 
   if (loading) {

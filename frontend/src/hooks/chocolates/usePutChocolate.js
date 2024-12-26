@@ -31,7 +31,7 @@ const usePutChocolate = () => {
       }
 
       const data = await response.json();
-      console.log('Success response from backend:', data);
+      console.log('response from backend:', data);
       return true;
     } catch (err) {
       console.error('Error in putChocolate:', err);

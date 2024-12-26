@@ -34,7 +34,6 @@ const usePostFavorite = () => {
       }
 
       const result = await response.json();
-      console.log(result.message);
 
       return true;
     } catch (error) {

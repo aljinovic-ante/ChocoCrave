@@ -6,7 +6,7 @@ const authenticateAdmin = async (req, res, next) => {
   const token = authHeader?.split(' ')[1];
 
   if (!token) {
-    console.log('No token provided');
+    console.log('No token');
     return res.status(401).json({ error: 'Access denied, unauthorized!' });
   }
 
