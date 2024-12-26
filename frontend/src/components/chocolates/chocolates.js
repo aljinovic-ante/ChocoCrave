@@ -1,13 +1,16 @@
+// src/pages/chocolates/Chocolates.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useGetChocolates from '../../hooks/chocolates/useGetChocolates';
 import ChocolateCard from './chocolateCard';
 import { useAuth } from '../../context/AuthContext';
+import usePostFavorite from '../../hooks/favorites/usePostFavorite';
 import '../../css/chocolates.css';
 
 const Chocolates = () => {
   const { user } = useAuth();
-  const { chocolates, loading, error, refetchChocolates } = useGetChocolates();
+  const { chocolates, loading, error } = useGetChocolates();
+  const { addToFavorites, loading: addingToFavorites, error: addFavoriteError } = usePostFavorite();
 
   if (loading) {
     return <p>Loading...</p>;
@@ -41,9 +44,18 @@ const Chocolates = () => {
             key={chocolate._id}
             chocolate={chocolate}
             user={user}
+            handleAddToFavorites={async () => {
+              if (!user) {
+                alert('You must be logged in to add to favorites.');
+                return;
+              }
+              await addToFavorites(user.id, chocolate._id);
+            }}
           />
         ))}
       </div>
+      {addingToFavorites && <p>Adding to favorites...</p>}
+      {addFavoriteError && <p>Error: {addFavoriteError}</p>}
     </div>
   );
 };

@@ -146,3 +146,17 @@
     background-color: #f9e4a5;
   }
   
+.chocolate-price,
+.chocolate-price-per-kg {
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+.chocolate-price {
+  margin-bottom: 5px;
+}
+
+.chocolate-price-per-kg {
+  margin-top: 0;
+}
