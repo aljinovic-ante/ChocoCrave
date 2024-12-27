@@ -18,7 +18,10 @@ const useGetFavorites = (userId) => {
             Authorization: `Bearer ${token}`,
           },
         });
-    
+        if(response.status===404){
+          setError('You have no favorites yet');
+          return { favorites, loading, error };
+        }
         if (!response.ok) {
           throw new Error('Failed to fetch favorites');
         }
