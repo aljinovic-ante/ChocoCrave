@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/manufacturers.css';
 
-const ChocolateCard = ({ chocolate, user, handleAddToFavorites }) => {
+const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites }) => {
   const pricePerKg =
     chocolate.weight && chocolate.price
       ? (chocolate.price / (parseInt(chocolate.weight) / 1000)).toFixed(2)
@@ -29,10 +29,29 @@ const ChocolateCard = ({ chocolate, user, handleAddToFavorites }) => {
       <div className="manufacturer-actions">
         <Link to={`/chocolates/${chocolate._id}`} className="view-button">Details</Link>
         <button
-          className="add-to-favorites-button"
-          onClick={() => handleAddToFavorites(chocolate._id)}
+          style={{
+            backgroundColor: isInFavorites ? "#a9a9a9" : "#e76f51",
+            color: "white",
+            padding: "8px 16px",
+            border: "none",
+            borderRadius: "4px",
+            cursor: isInFavorites ? "not-allowed" : "pointer",
+            fontSize: "1rem",
+            transition: "background-color 0.3s ease",
+            marginTop: "2px",
+          }}
+          onMouseOver={(e) => {
+            if (!isInFavorites) e.target.style.backgroundColor = "#d05a42";
+          }}
+          onMouseOut={(e) => {
+            if (!isInFavorites) e.target.style.backgroundColor = "#e76f51";
+          }}
+          onClick={() => {
+            if (!isInFavorites) handleAddToFavorites(chocolate._id);
+          }}
+          disabled={isInFavorites}
         >
-          Add to Favorites
+          {isInFavorites ? "Already in Favorites" : "Add to Favorites"}
         </button>
       </div>
     </div>

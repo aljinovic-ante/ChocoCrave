@@ -1,7 +1,7 @@
-// src/pages/chocolates/Chocolates.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import useGetChocolates from '../../hooks/chocolates/useGetChocolates';
+import useGetFavorites from '../../hooks/favorites/useGetFavorites';
 import ChocolateCard from './chocolateCard';
 import { useAuth } from '../../context/AuthContext';
 import usePostFavorite from '../../hooks/favorites/usePostFavorite';
@@ -9,10 +9,22 @@ import '../../css/chocolates.css';
 
 const Chocolates = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const { chocolates, loading, error } = useGetChocolates();
+  const { favorites, loading: favoritesLoading } = useGetFavorites(user?.id);
   const { addToFavorites, loading: addingToFavorites, error: addFavoriteError } = usePostFavorite();
+  const [localFavorites, setLocalFavorites] = useState([]);
 
-  if (loading) {
+  useEffect(() => {
+    setLocalFavorites(favorites);
+  }, [favorites]);
+
+  if (!user) {
+    navigate('/login');
+    return null;
+  }
+
+  if (loading || favoritesLoading) {
     return <p>Loading...</p>;
   }
 
@@ -20,11 +32,19 @@ const Chocolates = () => {
     return <p>Error: {error.message}</p>;
   }
 
+  const handleAddToFavorites = async (chocolateId) => {
+    const success = await addToFavorites(user.id, chocolateId);
+    if (success) {
+      const newFavorite = chocolates.find((chocolate) => chocolate._id === chocolateId);
+      setLocalFavorites([...localFavorites, newFavorite]);
+    }
+  };
+
   return (
     <div className="chocolates-container">
       <div className="header">
         <h2 className="header-title">All Chocolates</h2>
-        {user && user.isAdmin && (
+        {user.isAdmin && (
           <Link to="/chocolates/add" className="create-button">
             Add a Chocolate
           </Link>
@@ -44,13 +64,8 @@ const Chocolates = () => {
             key={chocolate._id}
             chocolate={chocolate}
             user={user}
-            handleAddToFavorites={async () => {
-              if (!user) {
-                alert('You must be logged in to add to favorites.');
-                return;
-              }
-              await addToFavorites(user.id, chocolate._id);
-            }}
+            isInFavorites={localFavorites.some((fav) => fav._id === chocolate._id)}
+            handleAddToFavorites={() => handleAddToFavorites(chocolate._id)}
           />
         ))}
       </div>

@@ -33,7 +33,21 @@ const Favorites = () => {
         }}
       />
       {favorites.length === 0 ? (
-        <p style={{ fontSize: '4rem', color: 'white' }}>You have no favorites yet!</p>
+        <div style={{
+          backgroundColor: 'white',
+          padding: '10px 20px',
+          borderRadius: '10px',
+          display: 'inline-block',
+          textAlign: 'center',
+          margin: '50px auto',
+          position: 'relative',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          border: '4px solid gold',
+        }}>
+          <p style={{ fontSize: '4rem', color: 'black', margin: 0 }}>You have no favorites yet!</p>
+        </div>
+        
       ) : (
         <div className="favorites-list">
           {favorites.map((chocolate) => (
