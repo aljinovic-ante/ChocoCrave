@@ -178,35 +178,49 @@ const ChocolateDetails = () => {
                 {chocolate.manufacturer_id.name} Info
               </Link>
               <button
-                  onClick={handleToggleFavorite}
-                  style={{
-                    padding: '10px 20px',
-                    border: `2px solid ${isInFavorites ? '#ff0000' : '#000000'}`,
-                    backgroundColor: isInFavorites ? '#ffcccc' : '#ffffff',
-                    color: isInFavorites ? '#ff0000' : '#000000',
-                    borderRadius: '5px',
-                    fontSize: '1rem',
-                    cursor: 'pointer',
-                    marginRight: '10px',
-                  }}
-                >
-                  {isInFavorites ? 'Remove from Favorites 🤍' : 'Add to Favorites ❤️'}
-                </button>
-                <button
-                onClick={handleToggleCart}
-                style={{
-                  padding: '10px 20px',
-                  border: '2px solid #ffffff',
-                  backgroundColor: cartItem ? '#ffcccc' : '#00ff00',
-                  color: cartItem ? '#ff0000' : '#ffffff',
-                  borderRadius: '5px',
-                  fontSize: '1rem',
-                  cursor: 'pointer',
-                  marginRight: '10px',
-                }}
-              >
-                {cartItem ? 'Remove from Cart 🛒' : 'Add to Cart 🛒'}
-              </button>
+              onClick={handleToggleFavorite}
+              style={{
+                padding: '10px 20px',
+                border: `2px solid ${isInFavorites ? '#ff0000' : '#000000'}`,
+                backgroundColor: isInFavorites ? '#ffcccc' : '#ffffff',
+                color: isInFavorites ? '#ff0000' : '#000000',
+                borderRadius: '5px',
+                fontSize: '1rem',
+                cursor: 'pointer',
+                marginRight: '10px',
+                transition: 'background-color 0.3s ease, border-color 0.3s ease',
+              }}
+              onMouseOver={(e) => {
+                e.target.style.backgroundColor = isInFavorites ? '#ffa3a3' : '#ffd6e2';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.backgroundColor = isInFavorites ? '#ffcccc' : '#ffffff';
+              }}
+            >
+              {isInFavorites ? 'Remove from Favorites 🤍' : 'Add to Favorites ❤️'}
+            </button>
+              <button
+              onClick={handleToggleCart}
+              style={{
+                padding: '10px 20px',
+                border: '2px solid #ffffff',
+                backgroundColor: cartItem ? '#add8e6' : '#87ceeb',
+                color: '#ffffff',
+                borderRadius: '5px',
+                fontSize: '1rem',
+                cursor: 'pointer',
+                marginRight: '10px',
+                transition: 'background-color 0.3s ease, border-color 0.3s ease',
+              }}
+              onMouseOver={(e) => {
+                e.target.style.backgroundColor = cartItem ? '#87ceeb' : '#4682b4';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.backgroundColor = cartItem ? '#add8e6' : '#87ceeb';
+              }}
+            >
+              {cartItem ? 'Remove from Cart 🛒' : 'Add to Cart 🛒'}
+            </button>
               {user?.isAdmin && (
                 <div className="admin-actions">
                   <Link

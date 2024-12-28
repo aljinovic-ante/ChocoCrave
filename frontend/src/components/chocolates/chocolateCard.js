@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/manufacturers.css';
 
-const ChocolateCard = ({ chocolate, user, handleToggleFavorite, isInFavorites, handleAddToCart, isInCart }) => {
+const ChocolateCard = ({ chocolate, user, handleToggleFavorite, isInFavorites, handleToggleCart, isInCart }) => {
   const pricePerKg =
     chocolate.weight && chocolate.price
       ? (chocolate.price / (parseInt(chocolate.weight) / 1000)).toFixed(2)
@@ -41,10 +41,10 @@ const ChocolateCard = ({ chocolate, user, handleToggleFavorite, isInFavorites, h
             marginTop: "2px",
           }}
           onMouseOver={(e) => {
-            if (!isInFavorites) e.target.style.backgroundColor = "#ffcccc";
+            e.target.style.backgroundColor = isInFavorites ? "#ffa3a3" : "#fcbdb8";
           }}
           onMouseOut={(e) => {
-            if (!isInFavorites) e.target.style.backgroundColor = "#ffffff";
+            e.target.style.backgroundColor = isInFavorites ? "#ffcccc" : "#ffffff";
           }}
           onClick={handleToggleFavorite}
         >
@@ -52,7 +52,7 @@ const ChocolateCard = ({ chocolate, user, handleToggleFavorite, isInFavorites, h
         </button>
         <button
           style={{
-            backgroundColor: isInCart ? "#87CEEB" : "#ffffff",
+            backgroundColor: isInCart ? "#44a4db" : "#ffffff",
             color: isInCart ? "#ffffff" : "#000000",
             padding: "8px 12px",
             border: "2px solid #000000",
@@ -63,12 +63,12 @@ const ChocolateCard = ({ chocolate, user, handleToggleFavorite, isInFavorites, h
             transition: "background-color 0.3s ease",
           }}
           onMouseOver={(e) => {
-            if (!isInCart) e.target.style.backgroundColor = "#f0f0f0";
+            e.target.style.backgroundColor = isInCart ? "#81c2fc" : "#cce7ff";
           }}
           onMouseOut={(e) => {
-            if (!isInCart) e.target.style.backgroundColor = isInCart ? "#87CEEB" : "#ffffff";
+            e.target.style.backgroundColor = isInCart ? "#44a4db" : "#ffffff";
           }}
-          onClick={handleAddToCart}
+          onClick={handleToggleCart}
         >
           {isInCart ? "🛒" : "🛒"}
         </button>
