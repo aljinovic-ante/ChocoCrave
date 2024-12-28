@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Manufacturer = require('../models/manufacturer.js');
 const authenticateUser = require('../middleware/requireAuth');
 const authenticateAdmin = require('../middleware/requireAdmin');
-
+const Chocolate = require('../models/chocolate');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -98,6 +98,16 @@ router.delete('/:id', authenticateAdmin, async (req, res) => {
     if (!manufacturer) {
       return res.status(404).json({ error: 'Manufacturer not found' });
     }
+
+    const relatedChocolates = await Chocolate.find({ manufacturer_id: id });
+    console.log("RELATED: ",relatedChocolates);
+    if (relatedChocolates.length > 0) {
+      return res.status(400).json({
+        error: 'Cannot delete manufacturer. There are products related to this manufacturer.',
+      });
+    }
+    
+    console.log("proslo :(");
 
     await Manufacturer.findByIdAndDelete(id);
     res.status(200).json({ message: 'Manufacturer deleted successfully' });

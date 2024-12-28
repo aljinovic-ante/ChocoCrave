@@ -59,9 +59,9 @@ const AddManufacturer = () => {
         }}
       />
       <div className="details-wrapper2">
-        <div className="details-content">
+        <div className="details-section2">
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="form-group2">
               <label>Name</label>
               <input
                 type="text"
@@ -70,7 +70,7 @@ const AddManufacturer = () => {
                 placeholder="Enter name"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group2">
               <label>Location</label>
               <input
                 type="text"
@@ -79,7 +79,7 @@ const AddManufacturer = () => {
                 placeholder="Enter location"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group2">
               <label>Image URL</label>
               <input
                 type="text"
@@ -88,7 +88,7 @@ const AddManufacturer = () => {
                 placeholder="Enter image URL"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group2">
               <label>Description</label>
               <textarea
                 rows="4"
@@ -97,7 +97,7 @@ const AddManufacturer = () => {
                 placeholder="Enter description"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group2">
               <label>Website</label>
               <input
                 type="text"

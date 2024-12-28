@@ -5,7 +5,7 @@ const chocolateSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     cocoa_percentage: { type: Number, required: true },
     color: { type: String },
-    type: { type: String }, //tamna mlijecna?
+    type: { type: String },
     weight: { type: String },
     manufacturer_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Manufacturer', required: true },
     description: { type: String },

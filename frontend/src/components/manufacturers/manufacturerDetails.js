@@ -14,6 +14,7 @@ const ManufacturerDetails = () => {
   const { deleteManufacturer } = useDeleteManufacturer();
   const { refetchManufacturers } = useGetManufacturers();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const handleDelete = async () => {
     try {
@@ -21,9 +22,11 @@ const ManufacturerDetails = () => {
       setShowDeleteModal(false);
       navigate('/');
     } catch (err) {
-      console.error('Failed to delete manufacturer:', err.message);
+      setShowDeleteModal(false);
+      setShowErrorModal(true);
     }
   };
+  
 
   const handleShowDeleteModal = () => {
     setShowDeleteModal(true);
@@ -31,6 +34,10 @@ const ManufacturerDetails = () => {
 
   const handleCloseDeleteModal = () => {
     setShowDeleteModal(false);
+  };
+
+  const handleCloseErrorModal = () => {
+    setShowErrorModal(false);
   };
 
   if (loading) {
@@ -46,25 +53,25 @@ const ManufacturerDetails = () => {
       <h2 style={{ color: 'white', fontWeight: 'bold', textAlign: 'center' }}>Manufacturer Details</h2>
       <div className="details-wrapper">
         <div className="details-image">
-        {manufacturer.image ? (
-          manufacturer.website ? (
-            <Link to={manufacturer.website}>
+          {manufacturer.image ? (
+            manufacturer.website ? (
+              <Link to={manufacturer.website}>
+                <img
+                  src={manufacturer.image}
+                  alt={`${manufacturer.name} logo`}
+                  className="manufacturer-logo"
+                />
+              </Link>
+            ) : (
               <img
                 src={manufacturer.image}
                 alt={`${manufacturer.name} logo`}
                 className="manufacturer-logo"
               />
-            </Link>
+            )
           ) : (
-            <img
-              src={manufacturer.image}
-              alt={`${manufacturer.name} logo`}
-              className="manufacturer-logo"
-            />
-          )
-        ) : (
-          <p>No Logo Available</p>
-        )}
+            <p>No Logo Available</p>
+          )}
         </div>
         <div className="details-content">
           <h3>{manufacturer.name}</h3>
@@ -97,6 +104,24 @@ const ManufacturerDetails = () => {
               </button>
               <button className="btn-danger2" onClick={handleDelete}>
                 Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {showErrorModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-header">
+              <h2>Cannot Delete Manufacturer</h2>
+              <span className="close" onClick={() => setShowErrorModal(false)}>&times;</span>
+            </div>
+            <div className="modal-body">
+              This manufacturer cannot be deleted because there are products related to it.
+            </div>
+            <div className="modal-footer">
+              <button className="btn-secondary" onClick={() => setShowErrorModal(false)}>
+                Close
               </button>
             </div>
           </div>

@@ -12,12 +12,18 @@ const useDeleteManufacturer = () => {
         },
       });
       if (!response.ok) {
+        const errorData = await response.json();
+        if (response.status === 400 && errorData.error) {
+          throw new Error(errorData.error);
+        }
         throw new Error('Failed to delete manufacturer');
       }
+
       await response.json();
       refetchManufacturers();
     } catch (err) {
       setError(err.message);
+      throw err;
     }
   };
 
