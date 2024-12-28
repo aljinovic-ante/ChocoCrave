@@ -10,6 +10,7 @@ import useGetCart from '../../hooks/cart/useGetCart';
 import useGetFavorites from '../../hooks/favorites/useGetFavorites';
 import '../../css/chocolateDetails.css';
 import useDeleteFavorite from '../../hooks/favorites/useDeleteFavorite';
+import useDeleteCartItem from '../../hooks/cart/useDeleteCartItem';
 
 const ChocolateDetails = () => {
   const { id } = useParams();
@@ -29,6 +30,7 @@ const ChocolateDetails = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const { deleteCartItem } = useDeleteCartItem();
 
   useEffect(() => {
     if (favorites && chocolate) {
@@ -55,22 +57,30 @@ const ChocolateDetails = () => {
     }
   };
 
-  const handleAddToFavorites = async () => {
-    if (!user) {
-      navigate('/login');
-      return;
-    }
+  const handleToggleCart = async () => {
     try {
-      await addToFavorites(user.id, chocolate._id);
-      setIsInFavorites(true);
+      if (cartItem) {
+        const success = await deleteCartItem(user.id, chocolate._id);
+        if (success) {
+          setCartItem(null);
+        }
+      } else {
+        const success = await addToCart(user.id, chocolate._id, 1);
+        if (success) {
+          setCartItem({
+            chocolate_id: chocolate,
+            quantity: 1,
+          });
+        }
+      }
+      await refetchCart();
     } catch (err) {
-      console.error('Error adding to favorites:', err.message);
+      console.error('Error toggling cart:', err.message);
     }
   };
-
+  
   const handleToggleFavorite = async () => {
     if (isInFavorites) {
-      // Remove from favorites
       try {
         const success = await deleteFavorite(user.id, chocolate._id);
         if (success) {
@@ -80,7 +90,6 @@ const ChocolateDetails = () => {
         console.error('Error removing from favorites:', err.message);
       }
     } else {
-      // Add to favorites
       try {
         await addToFavorites(user.id, chocolate._id);
         setIsInFavorites(true);
@@ -89,31 +98,6 @@ const ChocolateDetails = () => {
       }
     }
   };
-
-  const handleAddToCart = async () => {
-    if (!user) {
-      navigate('/login');
-      return;
-    }
-  
-    try {
-      if (cartItem) {
-        setCartItem({ ...cartItem, quantity: cartItem.quantity + 1 });
-      } else {
-        setCartItem({ chocolate_id: chocolate, quantity: 1 });
-      }
-  
-      await addToCart(user.id, chocolate._id, 1);
-  
-      const updatedCart = await refetchCart();
-      const updatedItem = updatedCart.find((item) => item.chocolate_id && item.chocolate_id._id === chocolate._id);
-  
-      setCartItem(updatedItem);
-    } catch (err) {
-      console.error('Error adding to cart:', err.message);
-    }
-  };
-  
 
   if (loading || favoritesLoading || cartLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -208,19 +192,20 @@ const ChocolateDetails = () => {
                 >
                   {isInFavorites ? 'Remove from Favorites 🤍' : 'Add to Favorites ❤️'}
                 </button>
-              <button
-                onClick={handleAddToCart}
+                <button
+                onClick={handleToggleCart}
                 style={{
                   padding: '10px 20px',
                   border: '2px solid #ffffff',
-                  backgroundColor: cartItem ? '#87CEEB' : '#00ff00',
-                  color: '#ffffff',
+                  backgroundColor: cartItem ? '#ffcccc' : '#00ff00',
+                  color: cartItem ? '#ff0000' : '#ffffff',
                   borderRadius: '5px',
                   fontSize: '1rem',
                   cursor: 'pointer',
+                  marginRight: '10px',
                 }}
               >
-                {cartItem ? `In Cart (${cartItem.quantity})` : '🛒 Add to Cart'}
+                {cartItem ? 'Remove from Cart 🛒' : 'Add to Cart 🛒'}
               </button>
               {user?.isAdmin && (
                 <div className="admin-actions">
