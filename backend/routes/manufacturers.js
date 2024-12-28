@@ -6,7 +6,7 @@ const authenticateAdmin = require('../middleware/requireAdmin');
 const Chocolate = require('../models/chocolate');
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', authenticateUser, async (req, res) => {
   try {
     const manufacturers = await Manufacturer.find();
     res.json(manufacturers);
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', authenticateUser, async (req, res) => {
   try {
     const { id } = req.params;
 

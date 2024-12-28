@@ -6,7 +6,7 @@ const authenticateAdmin = require('../middleware/requireAdmin');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', authenticateUser, async (req, res) => {
   try {
     const chocolates = await Chocolate.find().populate('manufacturer_id', 'name location');
     chocolates.sort((a, b) => {
@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', authenticateUser, async (req, res) => {
   try {
     const { id } = req.params;
 
