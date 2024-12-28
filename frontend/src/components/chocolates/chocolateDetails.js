@@ -9,6 +9,7 @@ import usePostCartItem from '../../hooks/cart/usePostCartItem';
 import useGetCart from '../../hooks/cart/useGetCart';
 import useGetFavorites from '../../hooks/favorites/useGetFavorites';
 import '../../css/chocolateDetails.css';
+import useDeleteFavorite from '../../hooks/favorites/useDeleteFavorite';
 
 const ChocolateDetails = () => {
   const { id } = useParams();
@@ -21,7 +22,7 @@ const ChocolateDetails = () => {
   const { cart, loading: cartLoading, refetchCart } = useGetCart(user?.id);
   const { addToFavorites } = usePostFavorite();
   const { addToCart } = usePostCartItem();
-
+  const { deleteFavorite } = useDeleteFavorite();
   const [isInFavorites, setIsInFavorites] = useState(false);
   const [cartItem, setCartItem] = useState(null);
 
@@ -64,6 +65,28 @@ const ChocolateDetails = () => {
       setIsInFavorites(true);
     } catch (err) {
       console.error('Error adding to favorites:', err.message);
+    }
+  };
+
+  const handleToggleFavorite = async () => {
+    if (isInFavorites) {
+      // Remove from favorites
+      try {
+        const success = await deleteFavorite(user.id, chocolate._id);
+        if (success) {
+          setIsInFavorites(false);
+        }
+      } catch (err) {
+        console.error('Error removing from favorites:', err.message);
+      }
+    } else {
+      // Add to favorites
+      try {
+        await addToFavorites(user.id, chocolate._id);
+        setIsInFavorites(true);
+      } catch (err) {
+        console.error('Error adding to favorites:', err.message);
+      }
     }
   };
 
@@ -171,22 +194,20 @@ const ChocolateDetails = () => {
                 {chocolate.manufacturer_id.name} Info
               </Link>
               <button
-                onClick={handleAddToFavorites}
-                disabled={isInFavorites}
-                style={{
-                  padding: '10px 20px',
-                  border: `2px solid ${isInFavorites ? '#ff0000' : '#000000'}`,
-                  backgroundColor: isInFavorites ? '#ffcccc' : '#ffffff',
-                  color: isInFavorites ? '#ff0000' : '#000000',
-                  borderRadius: '5px',
-                  fontSize: '1rem',
-                  cursor: isInFavorites ? 'not-allowed' : 'pointer',
-                  marginRight: '10px',
-                }}
-              >
-                {isInFavorites ? '❤️' : '🤍'}
-                {isInFavorites ? 'Already in Favorites' : 'Add to Favorites'}
-              </button>
+                  onClick={handleToggleFavorite}
+                  style={{
+                    padding: '10px 20px',
+                    border: `2px solid ${isInFavorites ? '#ff0000' : '#000000'}`,
+                    backgroundColor: isInFavorites ? '#ffcccc' : '#ffffff',
+                    color: isInFavorites ? '#ff0000' : '#000000',
+                    borderRadius: '5px',
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                    marginRight: '10px',
+                  }}
+                >
+                  {isInFavorites ? 'Remove from Favorites 🤍' : 'Add to Favorites ❤️'}
+                </button>
               <button
                 onClick={handleAddToCart}
                 style={{
