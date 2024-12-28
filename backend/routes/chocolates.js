@@ -9,6 +9,12 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const chocolates = await Chocolate.find().populate('manufacturer_id', 'name location');
+    chocolates.sort((a, b) => {
+      const nameA = a.manufacturer_id?.name || '';
+      const nameB = b.manufacturer_id?.name || '';
+      return nameA.localeCompare(nameB);
+    });
+
     res.json(chocolates);
   } catch (error) {
     console.error('Error fetching chocolates:', error);
