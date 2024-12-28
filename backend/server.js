@@ -6,6 +6,7 @@ const manufacturersRoutes = require('./routes/manufacturers');
 const chocolatesRoutes = require('./routes/chocolates');
 const usersRoute = require('./routes/users');
 const favoritesRoute = require('./routes/favorites');
+const cartRoute = require('./routes/cart');
 
 
 const app = express();
@@ -27,6 +28,7 @@ app.use('/api/manufacturers', manufacturersRoutes);
 app.use('/api/chocolates', chocolatesRoutes);
 app.use('/api/users', usersRoute);
 app.use('/api/favorites', favoritesRoute);
+app.use('/api/cart', cartRoute);
 
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

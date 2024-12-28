@@ -1,0 +1,188 @@
+.cart-container {
+    background-color: rgba(44, 13, 4, 0.923);
+    background-image: url('./cokolada.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .empty-cart-message {
+    background-color: white;
+    padding: 45px 70px;
+    border-radius: 10px;
+    text-align: center;
+    border: 4px solid gold;
+    width: 80%;
+    max-width: 700px;
+    margin: 50px auto;
+    transform: translateY(-50px);
+    font-size: 8.5rem;
+  }
+  
+  .cart-empty-p {
+    font-size: 8.5rem;
+    color: rgb(0, 0, 0);
+    margin: 0;
+  }  
+  
+  .cart-container h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: gold;
+  }
+  
+  .cart-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .cart-item {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: calc(25% - 20px);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .cart-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border: 2px solid gold;
+    background-color: #f9f4d6;
+  }
+  
+  .cart-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    max-height: 180px;
+    object-fit: cover;
+  }
+  
+  .cart-info {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .cart-info h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  .cart-info p {
+    color: #555;
+    font-size: 1rem;
+    margin: 5px 0;
+  }
+  
+  .cart-info .chocolate-price {
+    font-weight: bold;
+    color: #e76f51;
+  }
+  
+  .cart-item button {
+    background-color: #87ceeb;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-top: 8px;
+  }
+  
+  .cart-item button:hover {
+    background-color: #4682b4;
+  }
+  
+  .cart-item button:disabled {
+    background-color: #a9a9a9;
+    cursor: not-allowed;
+  }
+  
+  .remove-button {
+    padding: 8px 12px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+  }
+  
+  .remove-button:hover {
+    background-color: #c9302c;
+  }
+  
+  .remove-button:disabled {
+    background-color: #f0ad4e;
+    cursor: not-allowed;
+  }
+  
+  .update-button {
+    padding: 8px 12px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+  }
+  
+  .update-button:hover {
+    background-color: #4cae4c;
+  }
+  
+  .update-button:disabled {
+    background-color: #a9a9a9;
+    cursor: not-allowed;
+  }
+  
+  .cart-container p {
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+  }
+  
+  .cart-container .error-message {
+    color: red;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .cart-container .loading-message {
+    font-size: 1.5rem;
+    color: #6c757d;
+    text-align: center;
+  }
+  
+  .cart-info a,
+  .cart-item a {
+    text-decoration: none;
+    color: #6b4226;
+  }
+  
+  .cart-info a:hover,
+  .cart-item a:hover {
+    text-decoration: none;
+    color: #8b4513;
+  }
+  

@@ -20,6 +20,9 @@ const Navbar = () => {
         {user && (
           <a href={`/favorites/${user.id}`} className="nav-link">Favorites</a>
         )}
+        {user && (
+          <a href={`/cart/${user.id}`} className="nav-link">Cart</a>
+        )}
       </div>
 
       <p className="navbar-brand">ChocoCrave</p>

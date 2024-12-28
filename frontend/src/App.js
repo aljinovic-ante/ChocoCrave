@@ -15,6 +15,7 @@ import ChocolateDetails from './components/chocolates/chocolateDetails';
 import EditChocolate from './components/chocolates/editChocolate';
 import AddChocolate from './components/chocolates/addChocolate';
 import Favorites from './components/common/favorites';
+import Cart from './components/common/cart';
 
 function App() {
   return (
@@ -101,6 +102,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Favorites />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/cart/:id"
+            element={
+              <PrivateRoute>
+                <Cart />
               </PrivateRoute>
             }
           />

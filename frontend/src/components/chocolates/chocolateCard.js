@@ -30,28 +30,28 @@ const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites })
         <Link to={`/chocolates/${chocolate._id}`} className="view-button">Details</Link>
         <button
           style={{
-            backgroundColor: isInFavorites ? "#a9a9a9" : "#e76f51",
-            color: "white",
+            backgroundColor: isInFavorites ? "#ffffff" : "#ffffff",
+            color: isInFavorites ? "#ff0000" : "#000000",
             padding: "8px 16px",
-            border: "none",
+            border: `2px solid ${isInFavorites ? "#ff0000" : "#000000"}`,
             borderRadius: "4px",
             cursor: isInFavorites ? "not-allowed" : "pointer",
             fontSize: "1rem",
-            transition: "background-color 0.3s ease",
+            transition: "background-color 0.3s ease, border-color 0.3s ease",
             marginTop: "2px",
           }}
           onMouseOver={(e) => {
-            if (!isInFavorites) e.target.style.backgroundColor = "#d05a42";
+            if (!isInFavorites) e.target.style.backgroundColor = "#ffcccc";
           }}
           onMouseOut={(e) => {
-            if (!isInFavorites) e.target.style.backgroundColor = "#e76f51";
+            if (!isInFavorites) e.target.style.backgroundColor = "#ffffff";
           }}
           onClick={() => {
             if (!isInFavorites) handleAddToFavorites(chocolate._id);
           }}
           disabled={isInFavorites}
         >
-          {isInFavorites ? "Already in Favorites" : "Add to Favorites"}
+          {isInFavorites ? "❤️" : "🤍"}
         </button>
       </div>
     </div>
