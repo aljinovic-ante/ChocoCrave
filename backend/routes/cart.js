@@ -10,26 +10,20 @@ router.get('/:userId', authenticateUser, async (req, res) => {
   const { userId } = req.params;
 
   try {
-    const objectId = new mongoose.Types.ObjectId(userId);
-
-    const cart = await Cart.findOne({ user_id: objectId });
-
+    const cart = await Cart.findOne({ user_id: userId });
     if (!cart) {
       return res.status(404).json({ message: 'Cart not found for this user' });
     }
 
     const cartItems = await CartItem.find({ cart_id: cart._id }).populate('chocolate_id');
-
     res.status(200).json(cartItems);
   } catch (err) {
-    console.error('Error fetching cart:', err);
     res.status(500).json({ error: 'An error occurred while fetching the cart' });
   }
 });
 
 router.post('/add', authenticateUser, async (req, res) => {
   const { userId, chocolateId, quantity } = req.body;
-
   try {
     let cart = await Cart.findOne({ user_id: userId });
 

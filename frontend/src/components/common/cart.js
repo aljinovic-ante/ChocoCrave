@@ -77,20 +77,25 @@ const Cart = () => {
         }}
       />
       <div className="cart-list">
-        {cart.map((item) => (
-          <div className="cart-item" key={item.chocolate._id}>
-            <Link to={`/chocolates/${item.chocolate._id}`}>
-              {item.chocolate.image ? (
-                <img src={item.chocolate.image} alt={item.chocolate.name} />
+        {cart.map((item) => {
+        if (!item.chocolate_id || typeof item.chocolate_id !== 'object') {
+          console.warn("Invalid chocolate_id:", item);
+          return null;
+        }
+        return (
+          <div className="cart-item" key={item.chocolate_id._id}>
+            <Link to={`/chocolates/${item.chocolate_id._id}`}>
+              {item.chocolate_id.image ? (
+                <img src={item.chocolate_id.image} alt={item.chocolate_id.name} />
               ) : (
                 <div className="placeholder-image">No Image Available</div>
               )}
             </Link>
             <div className="cart-info">
-              <Link to={`/chocolates/${item.chocolate._id}`}>
-                <h3>{item.chocolate.name}</h3>
+              <Link to={`/chocolates/${item.chocolate_id._id}`}>
+                <h3>{item.chocolate_id.name}</h3>
               </Link>
-              <p>Price: {item.chocolate.price}€/kom</p>
+              <p>Price: {item.chocolate_id.price}€/kom</p>
               <p>Quantity: {item.quantity}</p>
               <button
                 className="remove-button"
@@ -121,7 +126,7 @@ const Cart = () => {
               {updateError && <p style={{ color: 'red' }}>{updateError}</p>}
             </div>
           </div>
-        ))}
+        )})}
       </div>
     </div>
   );

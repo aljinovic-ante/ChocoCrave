@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/manufacturers.css';
 
-const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites, handleAddToCart }) => {
+const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites, handleAddToCart, isInCart }) => {
   const pricePerKg =
     chocolate.weight && chocolate.price
       ? (chocolate.price / (parseInt(chocolate.weight) / 1000)).toFixed(2)
@@ -55,8 +55,8 @@ const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites, h
         </button>
         <button
           style={{
-            backgroundColor: "#ffffff",
-            color: "#000000",
+            backgroundColor: isInCart ? "#87CEEB" : "#ffffff",
+            color: isInCart ? "#ffffff" : "#000000",
             padding: "8px 12px",
             border: "2px solid #000000",
             borderRadius: "4px",
@@ -66,14 +66,14 @@ const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites, h
             transition: "background-color 0.3s ease",
           }}
           onMouseOver={(e) => {
-            e.target.style.backgroundColor = "#f0f0f0";
+            if (!isInCart) e.target.style.backgroundColor = "#f0f0f0";
           }}
           onMouseOut={(e) => {
-            e.target.style.backgroundColor = "#ffffff";
+            if (!isInCart) e.target.style.backgroundColor = isInCart ? "#87CEEB" : "#ffffff";
           }}
           onClick={handleAddToCart}
         >
-          🛒
+          {isInCart ? "🛒" : "🛒"}
         </button>
       </div>
     </div>

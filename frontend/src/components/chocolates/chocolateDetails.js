@@ -6,6 +6,7 @@ import useDeleteChocolate from '../../hooks/chocolates/useDeleteChocolate';
 import useGetChocolates from '../../hooks/chocolates/useGetChocolates';
 import usePostFavorite from '../../hooks/favorites/usePostFavorite';
 import usePostCartItem from '../../hooks/cart/usePostCartItem';
+import useGetCart from '../../hooks/cart/useGetCart';
 import useGetFavorites from '../../hooks/favorites/useGetFavorites';
 import '../../css/chocolateDetails.css';
 
@@ -17,9 +18,12 @@ const ChocolateDetails = () => {
   const { deleteChocolate } = useDeleteChocolate();
   const { refetchChocolates } = useGetChocolates();
   const { favorites, loading: favoritesLoading } = useGetFavorites(user?.id);
-  const [isInFavorites, setIsInFavorites] = useState(false);
+  const { cart, loading: cartLoading, refetchCart } = useGetCart(user?.id);
   const { addToFavorites } = usePostFavorite();
   const { addToCart } = usePostCartItem();
+
+  const [isInFavorites, setIsInFavorites] = useState(false);
+  const [cartItem, setCartItem] = useState(null);
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -30,6 +34,13 @@ const ChocolateDetails = () => {
       setIsInFavorites(favorites.some((fav) => fav._id === chocolate._id));
     }
   }, [favorites, chocolate]);
+
+  useEffect(() => {
+    if (cart && chocolate) {
+      const item = cart.find((item) => item.chocolate_id && item.chocolate_id._id === chocolate._id);
+      setCartItem(item);
+    }
+  }, [cart, chocolate]);
 
   const handleDelete = async () => {
     try {
@@ -45,12 +56,11 @@ const ChocolateDetails = () => {
 
   const handleAddToFavorites = async () => {
     if (!user) {
-      alert('You must be logged in to add to favorites.');
+      navigate('/login');
       return;
     }
     try {
       await addToFavorites(user.id, chocolate._id);
-      alert(`${chocolate.name} added to your favorites.`);
       setIsInFavorites(true);
     } catch (err) {
       console.error('Error adding to favorites:', err.message);
@@ -59,18 +69,30 @@ const ChocolateDetails = () => {
 
   const handleAddToCart = async () => {
     if (!user) {
-      alert('You must be logged in to add to the cart.');
+      navigate('/login');
       return;
     }
+  
     try {
+      if (cartItem) {
+        setCartItem({ ...cartItem, quantity: cartItem.quantity + 1 });
+      } else {
+        setCartItem({ chocolate_id: chocolate, quantity: 1 });
+      }
+  
       await addToCart(user.id, chocolate._id, 1);
-      alert(`${chocolate.name} added to your cart.`);
+  
+      const updatedCart = await refetchCart();
+      const updatedItem = updatedCart.find((item) => item.chocolate_id && item.chocolate_id._id === chocolate._id);
+  
+      setCartItem(updatedItem);
     } catch (err) {
       console.error('Error adding to cart:', err.message);
     }
   };
+  
 
-  if (loading || favoritesLoading) return <div>Loading...</div>;
+  if (loading || favoritesLoading || cartLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
@@ -169,15 +191,15 @@ const ChocolateDetails = () => {
                 onClick={handleAddToCart}
                 style={{
                   padding: '10px 20px',
-                  border: '2px solid #000000',
-                  backgroundColor: '#ffffff',
-                  color: '#000000',
+                  border: '2px solid #ffffff',
+                  backgroundColor: cartItem ? '#87CEEB' : '#00ff00',
+                  color: '#ffffff',
                   borderRadius: '5px',
                   fontSize: '1rem',
                   cursor: 'pointer',
                 }}
               >
-                🛒 Add to Cart
+                {cartItem ? `In Cart (${cartItem.quantity})` : '🛒 Add to Cart'}
               </button>
               {user?.isAdmin && (
                 <div className="admin-actions">

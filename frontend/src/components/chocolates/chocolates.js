@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useGetChocolates from '../../hooks/chocolates/useGetChocolates';
 import useGetFavorites from '../../hooks/favorites/useGetFavorites';
+import useGetCart from '../../hooks/cart/useGetCart';
+import usePostCartItem from '../../hooks/cart/usePostCartItem';
 import ChocolateCard from './chocolateCard';
 import { useAuth } from '../../context/AuthContext';
 import usePostFavorite from '../../hooks/favorites/usePostFavorite';
@@ -12,12 +14,20 @@ const Chocolates = () => {
   const navigate = useNavigate();
   const { chocolates, loading, error } = useGetChocolates();
   const { favorites, loading: favoritesLoading } = useGetFavorites(user?.id);
+  const { cart, refetchCart } = useGetCart(user?.id);
+  const { addToCart, loading: addingToCart, error: addCartError } = usePostCartItem();
   const { addToFavorites, loading: addingToFavorites, error: addFavoriteError } = usePostFavorite();
+
   const [localFavorites, setLocalFavorites] = useState([]);
+  const [localCart, setLocalCart] = useState([]);
 
   useEffect(() => {
     setLocalFavorites(favorites);
   }, [favorites]);
+
+  useEffect(() => {
+    setLocalCart(cart);
+  }, [cart]);
 
   if (!user) {
     navigate('/login');
@@ -40,8 +50,14 @@ const Chocolates = () => {
     }
   };
 
-  const handleAddToCart = (chocolate) => {
-    alert(`Added ${chocolate.name} to cart!`);
+  const handleAddToCart = async (chocolate) => {
+    try {
+      await addToCart(user.id, chocolate._id, 1);
+      const updatedCart = await refetchCart();
+      setLocalCart(updatedCart);
+    } catch (err) {
+      console.error('Error adding to cart:', err.message);
+    }
   };
 
   return (
@@ -69,6 +85,7 @@ const Chocolates = () => {
             chocolate={chocolate}
             user={user}
             isInFavorites={localFavorites.some((fav) => fav._id === chocolate._id)}
+            isInCart={localCart.some((item) => item.chocolate_id._id === chocolate._id)}
             handleAddToFavorites={() => handleAddToFavorites(chocolate._id)}
             handleAddToCart={() => handleAddToCart(chocolate)}
           />
@@ -76,6 +93,8 @@ const Chocolates = () => {
       </div>
       {addingToFavorites && <p>Adding to favorites...</p>}
       {addFavoriteError && <p>Error: {addFavoriteError}</p>}
+      {addingToCart && <p>Adding to cart...</p>}
+      {addCartError && <p>Error: {addCartError}</p>}
     </div>
   );
 };
