@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/manufacturers.css';
 
-const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites, handleAddToCart, isInCart }) => {
+const ChocolateCard = ({ chocolate, user, handleToggleFavorite, isInFavorites, handleAddToCart, isInCart }) => {
   const pricePerKg =
     chocolate.weight && chocolate.price
       ? (chocolate.price / (parseInt(chocolate.weight) / 1000)).toFixed(2)
@@ -35,7 +35,7 @@ const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites, h
             padding: "8px 12px",
             border: `2px solid ${isInFavorites ? "#ff0000" : "#000000"}`,
             borderRadius: "4px",
-            cursor: isInFavorites ? "not-allowed" : "pointer",
+            cursor: "pointer",
             fontSize: "1rem",
             transition: "background-color 0.3s ease, border-color 0.3s ease",
             marginTop: "2px",
@@ -46,10 +46,7 @@ const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites, h
           onMouseOut={(e) => {
             if (!isInFavorites) e.target.style.backgroundColor = "#ffffff";
           }}
-          onClick={() => {
-            if (!isInFavorites) handleAddToFavorites(chocolate._id);
-          }}
-          disabled={isInFavorites}
+          onClick={handleToggleFavorite}
         >
           {isInFavorites ? "❤️" : "🤍"}
         </button>

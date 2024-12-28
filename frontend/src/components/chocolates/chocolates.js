@@ -8,6 +8,7 @@ import ChocolateCard from './chocolateCard';
 import { useAuth } from '../../context/AuthContext';
 import usePostFavorite from '../../hooks/favorites/usePostFavorite';
 import '../../css/chocolates.css';
+import useDeleteFavorite from '../../hooks/favorites/useDeleteFavorite';
 
 const Chocolates = () => {
   const { user } = useAuth();
@@ -20,6 +21,22 @@ const Chocolates = () => {
 
   const [localFavorites, setLocalFavorites] = useState([]);
   const [localCart, setLocalCart] = useState([]);
+  const { deleteFavorite } = useDeleteFavorite();
+
+  const handleToggleFavorite = async (chocolateId) => {
+    if (localFavorites.some((fav) => fav._id === chocolateId)) {
+      const success = await deleteFavorite(user.id, chocolateId);
+      if (success) {
+        setLocalFavorites(localFavorites.filter((fav) => fav._id !== chocolateId));
+      }
+    } else {
+      const success = await addToFavorites(user.id, chocolateId);
+      if (success) {
+        const newFavorite = chocolates.find((chocolate) => chocolate._id === chocolateId);
+        setLocalFavorites([...localFavorites, newFavorite]);
+      }
+    }
+  };
 
   useEffect(() => {
     setLocalFavorites(favorites);
@@ -86,7 +103,7 @@ const Chocolates = () => {
             user={user}
             isInFavorites={localFavorites.some((fav) => fav._id === chocolate._id)}
             isInCart={localCart.some((item) => item.chocolate_id._id === chocolate._id)}
-            handleAddToFavorites={() => handleAddToFavorites(chocolate._id)}
+            handleToggleFavorite={() => handleToggleFavorite(chocolate._id)}
             handleAddToCart={() => handleAddToCart(chocolate)}
           />
         ))}
