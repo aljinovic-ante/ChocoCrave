@@ -36,21 +36,30 @@ const Cart = () => {
 
   if (!cart || cart.length === 0) {
     return (
-      <div className="cart-container">
-        <div className="empty-cart-message">
-        <p
+      <div
+        className="cart-container"
         style={{
-          textAlign: 'center',
-          width: '90%',
-          margin: '50px auto',
-          transform: 'translateY(-25px)',
-          fontSize: '4.5rem',
-          color: 'black',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+          height: '100vh',
+          paddingTop: '10vh',
+          backgroundColor: 'rgba(44, 13, 4, 0.923)',
         }}
       >
-        Your cart is empty :)
-      </p>
-
+        <div
+          style={{
+            backgroundColor: 'white',
+            padding: '30px 50px',
+            borderRadius: '10px',
+            textAlign: 'center',
+            border: '4px solid gold',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+          }}
+        >
+          <p style={{ fontSize: '3rem', color: 'black', margin: 0 }}>
+            Your cart is empty :)
+          </p>
         </div>
       </div>
     );

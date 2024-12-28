@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import useGetChocolate from '../../hooks/chocolates/useGetChocolate';
 import { useAuth } from '../../context/AuthContext';
 import useDeleteChocolate from '../../hooks/chocolates/useDeleteChocolate';
 import useGetChocolates from '../../hooks/chocolates/useGetChocolates';
+import usePostFavorite from '../../hooks/favorites/usePostFavorite';
+import usePostCartItem from '../../hooks/cart/usePostCartItem';
+import useGetFavorites from '../../hooks/favorites/useGetFavorites';
 import '../../css/chocolateDetails.css';
 
 const ChocolateDetails = () => {
@@ -13,9 +16,20 @@ const ChocolateDetails = () => {
   const { user } = useAuth();
   const { deleteChocolate } = useDeleteChocolate();
   const { refetchChocolates } = useGetChocolates();
+  const { favorites, loading: favoritesLoading } = useGetFavorites(user?.id);
+  const [isInFavorites, setIsInFavorites] = useState(false);
+  const { addToFavorites } = usePostFavorite();
+  const { addToCart } = usePostCartItem();
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
+
+  useEffect(() => {
+    if (favorites && chocolate) {
+      setIsInFavorites(favorites.some((fav) => fav._id === chocolate._id));
+    }
+  }, [favorites, chocolate]);
 
   const handleDelete = async () => {
     try {
@@ -29,7 +43,34 @@ const ChocolateDetails = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  const handleAddToFavorites = async () => {
+    if (!user) {
+      alert('You must be logged in to add to favorites.');
+      return;
+    }
+    try {
+      await addToFavorites(user.id, chocolate._id);
+      alert(`${chocolate.name} added to your favorites.`);
+      setIsInFavorites(true);
+    } catch (err) {
+      console.error('Error adding to favorites:', err.message);
+    }
+  };
+
+  const handleAddToCart = async () => {
+    if (!user) {
+      alert('You must be logged in to add to the cart.');
+      return;
+    }
+    try {
+      await addToCart(user.id, chocolate._id, 1);
+      alert(`${chocolate.name} added to your cart.`);
+    } catch (err) {
+      console.error('Error adding to cart:', err.message);
+    }
+  };
+
+  if (loading || favoritesLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
@@ -94,7 +135,7 @@ const ChocolateDetails = () => {
                   borderRadius: '5px',
                   fontSize: '1rem',
                   cursor: 'pointer',
-                  transition: 'background-color 0.3s, color 0.3s',
+                  marginRight: '10px',
                 }}
                 onMouseOver={(e) => {
                   e.target.style.backgroundColor = 'rgb(138,109,102)';
@@ -107,6 +148,37 @@ const ChocolateDetails = () => {
               >
                 {chocolate.manufacturer_id.name} Info
               </Link>
+              <button
+                onClick={handleAddToFavorites}
+                disabled={isInFavorites}
+                style={{
+                  padding: '10px 20px',
+                  border: `2px solid ${isInFavorites ? '#ff0000' : '#000000'}`,
+                  backgroundColor: isInFavorites ? '#ffcccc' : '#ffffff',
+                  color: isInFavorites ? '#ff0000' : '#000000',
+                  borderRadius: '5px',
+                  fontSize: '1rem',
+                  cursor: isInFavorites ? 'not-allowed' : 'pointer',
+                  marginRight: '10px',
+                }}
+              >
+                {isInFavorites ? '❤️' : '🤍'}
+                {isInFavorites ? 'Already in Favorites' : 'Add to Favorites'}
+              </button>
+              <button
+                onClick={handleAddToCart}
+                style={{
+                  padding: '10px 20px',
+                  border: '2px solid #000000',
+                  backgroundColor: '#ffffff',
+                  color: '#000000',
+                  borderRadius: '5px',
+                  fontSize: '1rem',
+                  cursor: 'pointer',
+                }}
+              >
+                🛒 Add to Cart
+              </button>
               {user?.isAdmin && (
                 <div className="admin-actions">
                   <Link

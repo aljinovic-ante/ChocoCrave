@@ -23,15 +23,15 @@ const Favorites = () => {
 
   return (
     <div className="favorites-container">
-      <h2 style={{ color: 'white' }}>Your Favorite Chocolates</h2>
-      <hr
+      {favorites.length !== 0 && <h2 style={{ color: 'white' }}>Your Favorite Chocolates</h2>}
+      {favorites.length !== 0 && <hr
         style={{
           border: 'none',
           height: '3px',
           backgroundColor: 'white',
           margin: '20px 0',
         }}
-      />
+      />}
       {favorites.length === 0 ? (
         <div style={{
           backgroundColor: 'white',
@@ -45,7 +45,7 @@ const Favorites = () => {
           transform: 'translateX(-50%)',
           border: '4px solid gold',
         }}>
-          <p style={{ fontSize: '4rem', color: 'black', margin: 0 }}>You have no favorites yet!</p>
+          <p style={{ fontSize: '3rem', color: 'black', margin: 0 }}>You have no favorites yet!</p>
         </div>
         
       ) : (

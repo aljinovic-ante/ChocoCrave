@@ -40,6 +40,10 @@ const Chocolates = () => {
     }
   };
 
+  const handleAddToCart = (chocolate) => {
+    alert(`Added ${chocolate.name} to cart!`);
+  };
+
   return (
     <div className="chocolates-container">
       <div className="header">
@@ -66,6 +70,7 @@ const Chocolates = () => {
             user={user}
             isInFavorites={localFavorites.some((fav) => fav._id === chocolate._id)}
             handleAddToFavorites={() => handleAddToFavorites(chocolate._id)}
+            handleAddToCart={() => handleAddToCart(chocolate)}
           />
         ))}
       </div>

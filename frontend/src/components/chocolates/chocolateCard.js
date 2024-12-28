@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/manufacturers.css';
 
-const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites }) => {
+const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites, handleAddToCart }) => {
   const pricePerKg =
     chocolate.weight && chocolate.price
       ? (chocolate.price / (parseInt(chocolate.weight) / 1000)).toFixed(2)
@@ -30,9 +30,9 @@ const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites })
         <Link to={`/chocolates/${chocolate._id}`} className="view-button">Details</Link>
         <button
           style={{
-            backgroundColor: isInFavorites ? "#ffffff" : "#ffffff",
+            backgroundColor: isInFavorites ? "#ffcccc" : "#ffffff",
             color: isInFavorites ? "#ff0000" : "#000000",
-            padding: "8px 16px",
+            padding: "8px 12px",
             border: `2px solid ${isInFavorites ? "#ff0000" : "#000000"}`,
             borderRadius: "4px",
             cursor: isInFavorites ? "not-allowed" : "pointer",
@@ -52,6 +52,28 @@ const ChocolateCard = ({ chocolate, user, handleAddToFavorites, isInFavorites })
           disabled={isInFavorites}
         >
           {isInFavorites ? "❤️" : "🤍"}
+        </button>
+        <button
+          style={{
+            backgroundColor: "#ffffff",
+            color: "#000000",
+            padding: "8px 12px",
+            border: "2px solid #000000",
+            borderRadius: "4px",
+            cursor: "pointer",
+            fontSize: "1.2rem",
+            marginLeft: "10px",
+            transition: "background-color 0.3s ease",
+          }}
+          onMouseOver={(e) => {
+            e.target.style.backgroundColor = "#f0f0f0";
+          }}
+          onMouseOut={(e) => {
+            e.target.style.backgroundColor = "#ffffff";
+          }}
+          onClick={handleAddToCart}
+        >
+          🛒
         </button>
       </div>
     </div>
