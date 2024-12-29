@@ -94,11 +94,11 @@ const Cart = () => {
       <div className="cart-list">
         {cart.map((item) => (
           <div className="cart-item" key={item.chocolate_id._id}>
-            <Link to={`/chocolates/${item.chocolate_id._id}`}>
+            <Link to={`/chocolates/${item.chocolate_id._id}`} className="chocolate-link">
               {item.chocolate_id.image ? (
                 <img src={item.chocolate_id.image} alt={item.chocolate_id.name} />
               ) : (
-                <div className="placeholder-image">No Image Available</div>
+                <div className="no-image-text">No Image Available</div>
               )}
             </Link>
             <div className="cart-info">

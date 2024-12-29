@@ -73,11 +73,11 @@ const Favorites = () => {
       <div className="cart-list">
         {favorites.map((chocolate) => (
           <div className="cart-item" key={chocolate._id}>
-            <Link to={`/chocolates/${chocolate._id}`}>
+            <Link to={`/chocolates/${chocolate._id}`} className="chocolate-link">
               {chocolate.image ? (
                 <img src={chocolate.image} alt={chocolate.name} />
               ) : (
-                <div className="placeholder-image">No Image Available</div>
+                <div className="no-image-text">No Image Available</div>
               )}
             </Link>
             <div className="cart-info">
