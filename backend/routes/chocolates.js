@@ -9,10 +9,18 @@ const router = express.Router();
 router.get('/', authenticateUser, async (req, res) => {
   try {
     const chocolates = await Chocolate.find().populate('manufacturer_id', 'name location');
+
     chocolates.sort((a, b) => {
-      const nameA = a.manufacturer_id?.name || '';
-      const nameB = b.manufacturer_id?.name || '';
-      return nameA.localeCompare(nameB);
+      const manufacturerNameA = a.manufacturer_id?.name || '';
+      const manufacturerNameB = b.manufacturer_id?.name || '';
+      const chocolateNameA = a.name.toLowerCase();
+      const chocolateNameB = b.name.toLowerCase();
+
+      if (manufacturerNameA !== manufacturerNameB) {
+        return manufacturerNameA.localeCompare(manufacturerNameB);
+      }
+
+      return chocolateNameA.localeCompare(chocolateNameB);
     });
 
     res.json(chocolates);
@@ -21,6 +29,7 @@ router.get('/', authenticateUser, async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch chocolates' });
   }
 });
+
 
 router.get('/:id', authenticateUser, async (req, res) => {
   try {
