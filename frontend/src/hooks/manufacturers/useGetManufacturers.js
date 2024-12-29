@@ -8,7 +8,13 @@ const useGetManufacturers = () => {
   useEffect(() => {
     const fetchManufacturers = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/manufacturers');
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:5000/api/manufacturers', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
         if (!response.ok) {
           throw new Error('Failed to fetch manufacturers');
         }
@@ -27,7 +33,13 @@ const useGetManufacturers = () => {
   const refetchManufacturers = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/manufacturers');
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/api/manufacturers', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
       if (!response.ok) {
         throw new Error('Failed to fetch manufacturers');
       }

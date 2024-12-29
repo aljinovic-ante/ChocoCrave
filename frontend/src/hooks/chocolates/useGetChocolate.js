@@ -8,14 +8,20 @@ const useGetChocolate = (id) => {
   useEffect(() => {
     const fetchChocolate = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/chocolates/${id}`);
+        const token = localStorage.getItem('token');
+        const response = await fetch(`http://localhost:5000/api/chocolates/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
         if (!response.ok) {
           throw new Error('Failed to fetch chocolate');
         }
         const data = await response.json();
         setChocolate(data);
       } catch (err) {
-        setError(err);
+        setError(err.message);
       } finally {
         setLoading(false);
       }

@@ -8,20 +8,28 @@ const useGetManufacturer = (id) => {
   useEffect(() => {
     const fetchManufacturer = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/manufacturers/${id}`);
+        const token = localStorage.getItem('token');
+        const response = await fetch(`http://localhost:5000/api/manufacturers/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
         if (!response.ok) {
           throw new Error('Failed to fetch manufacturer');
         }
         const data = await response.json();
         setManufacturer(data);
       } catch (err) {
-        setError(err);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchManufacturer();
+    if (id) {
+      fetchManufacturer();
+    }
   }, [id]);
 
   return { manufacturer, loading, error };

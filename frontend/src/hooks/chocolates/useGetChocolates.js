@@ -8,7 +8,12 @@ const useGetChocolates = () => {
   useEffect(() => {
     const fetchChocolates = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/chocolates');
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:5000/api/chocolates', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch chocolates');
         }
@@ -27,7 +32,12 @@ const useGetChocolates = () => {
   const refetchChocolates = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/chocolates');
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/api/chocolates', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       if (!response.ok) {
         throw new Error('Failed to fetch chocolates');
       }
