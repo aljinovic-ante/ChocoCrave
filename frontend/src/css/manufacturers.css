@@ -1,6 +1,6 @@
 .list-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); 
+    grid-template-columns: repeat(4, 1fr); 
     gap: 20px 20px;
     justify-items: center;
   }
@@ -18,28 +18,60 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between; 
-    width: 250px;
-    padding: 15px;
+    width: 200px;
+    padding: 10px;
     background-color: #f9f9f9;
     border: 4px solid #abb61b;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    height: 350px; 
-    width: 320px;
+    height: 250px; 
   }
+
+  .manufacturer-item22 {
+    margin: 0 5px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; 
+    width: 200px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 3px solid #abb61b;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 250px; 
+  }
+  
+  .manufacturer-logo {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .manufacturer-name {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .manufacturer-actions .view-button,
+  .manufacturer-actions .edit-button,
+  .manufacturer-actions .delete-button {
+    font-size: 1rem;
+    padding: 4px 8px;
+    border-radius: 5px;
+    width: 100px;
+  }
+  
+  
   
   .manufacturer-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: #fff9e9;
-  }
-  
-  .manufacturer-logo {
-    width: 200%;
-    max-width: 200px;
-    height: auto;
-    border-radius: 8px;
   }
   
   .manufacturer-link {
@@ -49,12 +81,6 @@
     text-decoration: none;
     color: inherit;
     width: 100%;
-  }
-  
-  .manufacturer-name {
-    text-decoration: none;
-    font-size: 1.4rem;
-    color: #333;
   }
   
   .manufacturer-link:hover .manufacturer-name {

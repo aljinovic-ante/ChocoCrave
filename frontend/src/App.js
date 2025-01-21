@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Manufacturers from './components/manufacturers/manufacturers';
 import ManufacturerDetails from './components/manufacturers/manufacturerDetails';
@@ -113,6 +113,8 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/chocolates" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </AuthProvider>

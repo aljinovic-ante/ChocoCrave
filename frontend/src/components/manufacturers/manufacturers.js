@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useGetManufacturers from '../../hooks/manufacturers/useGetManufacturers';
-import ManufacturerCard from './manufacturerCard.js';
+import ManufacturerCard from './ManufacturerCard.js';
 import { useAuth } from '../../context/AuthContext';
 import '../../css/manufacturers.css';
 
