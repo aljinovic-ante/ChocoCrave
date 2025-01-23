@@ -7,8 +7,11 @@ import RegisterForm from './components/auth/register';
 import LoginForm from './components/auth/login';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/auth/privateRoute';
+import AdminRoute from './components/auth/adminRoute';
 import Navbar from './components/common/navbar';
 import Users from './components/users/users';
+import OnlyAdmins from './components/users/onlyAdmins';
+import OnlyUsers from './components/users/onlyUsers';
 import AddManufacturer from './components/manufacturers/addManufacturer';
 import Chocolates from './components/chocolates/chocolates';
 import ChocolateDetails from './components/chocolates/chocolateDetails';
@@ -45,10 +48,26 @@ function App() {
             path="/admin"
             element={
               <PrivateRoute>
-                <Users />
+                <AdminRoute>
+                  <Users />
+                </AdminRoute>
               </PrivateRoute>
             }
           />
+          <Route path="/only-admins" element={
+            <PrivateRoute>
+              <AdminRoute>
+                <OnlyAdmins />
+              </AdminRoute>
+            </PrivateRoute>
+          } />
+          <Route path="/only-users" element={
+            <PrivateRoute>
+              <AdminRoute>
+                <OnlyUsers />
+              </ AdminRoute>
+            </PrivateRoute>
+            } />
           <Route
             path="/manufacturers/:id"
             element={
