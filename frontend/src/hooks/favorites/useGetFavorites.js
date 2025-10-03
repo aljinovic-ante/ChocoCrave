@@ -27,7 +27,7 @@ const useGetFavorites = (userId) => {
         }
     
         const data = await response.json();
-        setFavorites(data);
+        setFavorites(data.filter(choco => choco !== null));
       } catch (err) {
         console.error('Error fetching favorites:', err);
         setError(err.message || 'An unknown error occurred');

@@ -18,9 +18,12 @@ router.get('/:userId', authenticateUser, async (req, res) => {
       return res.status(404).json({ message: 'Favorites not found for this user' });
     }
 
-    const favoriteItems = await FavoriteItem.find({ favorites_id: favorites._id }).populate('chocolate_id');
+    const favoriteItems = await FavoriteItem.find({ favorites_id: favorites._id })
+      .populate('chocolate_id');
 
-    const favoriteChocolates = favoriteItems.map((item) => item.chocolate_id);
+    const favoriteChocolates = favoriteItems
+      .filter(item => item.chocolate_id !== null)
+      .map(item => item.chocolate_id);
 
     res.status(200).json(favoriteChocolates);
   } catch (err) {

@@ -100,8 +100,8 @@ const Chocolates = () => {
             key={chocolate._id}
             chocolate={chocolate}
             user={user}
-            isInFavorites={localFavorites.some((fav) => fav._id === chocolate._id)}
-            isInCart={localCart.some((item) => item.chocolate_id._id === chocolate._id)}
+            isInFavorites={localFavorites.some((fav) => fav && fav._id === chocolate._id)}
+            isInCart={localCart.some((item) => item && item.chocolate_id && item.chocolate_id._id === chocolate._id)}
             handleToggleFavorite={() => handleToggleFavorite(chocolate._id)}
             handleToggleCart={() => handleToggleCart(chocolate._id)}
           />
