@@ -5,6 +5,7 @@ import usePutUser from '../../hooks/users/usePutUser';
 import useDeleteUser from '../../hooks/users/useDeleteUser';
 import useChangePassword from '../../hooks/users/useChangePass';
 import '../../css/users.css';
+import { useNavigate } from 'react-router-dom';
 
 const Users = () => {
   const { user } = useAuth();
@@ -27,6 +28,8 @@ const Users = () => {
   const [updateError, setUpdateError] = useState(null);
 
   const [errorModal, setErrorModal] = useState(null);
+
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   if (putError) {
@@ -129,9 +132,42 @@ const Users = () => {
     return <div>Error: {getError.message}</div>;
   }
 
+  const adminCount = users.filter((u) => u.isAdmin).length;
+  const nonAdminCount = users.length - adminCount;
+
+  const handleAdminRedirect = () => {
+    const adminUsers = users.filter((u) => u.isAdmin);
+    navigate('/only-admins', { state: { adminUsers } });
+  };
+
+  const handleUserRedirect = () => {
+    const nonAdminUsers = users.filter((u) => !u.isAdmin);
+    navigate('/only-users', { state: { nonAdminUsers } });
+  };
+
   return (
     <div className="users-container">
       <h1 style={{ textAlign: 'center', fontSize: '2rem', margin: '20px 0', color: 'white' }}>All Users</h1>
+      <div style={{ textAlign: 'center', marginBottom: '20px', color: 'white' }}>
+        <p>
+          Number of Admins:   
+          <span
+            style={{ fontSize: '1rem',color: 'white', cursor: 'pointer', textDecoration: 'underline' }}
+            onClick={handleAdminRedirect}
+          >
+            {adminCount}
+          </span>
+        </p>
+        <p>
+          Number of Users:   
+          <span
+            style={{ fontSize: '1rem',color: 'white', cursor: 'pointer', textDecoration: 'underline' }}
+            onClick={handleUserRedirect}
+          >
+            {nonAdminCount}
+          </span>
+        </p>
+      </div>
       <table className="users-table">
         <thead>
           <tr>
